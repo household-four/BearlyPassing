@@ -1,5 +1,21 @@
 package bearly_passing.project;
 
-public class Student {
+import jakarta.persistence.ManyToMany;
 
+import java.util.List;
+
+import jakarta.persistence.Entity;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@Data
+@Entity
+@EqualsAndHashCode(callSuper = true)
+public class Student extends User {
+    @ManyToMany(mappedBy = "students")
+    private List<Teacher> teachers;
+
+    public void playGame(GameSession game) {
+        game.startGame(this);
+    }
 }

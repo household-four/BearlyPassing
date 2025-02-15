@@ -16,7 +16,7 @@ public class Game {
     private Long id;
 
     // I think we had multiple game types considered, so thats what this is. E.g.
-    // "Flashcards", "Matching" or wahtever
+    // "Flashcards", "Matching" or whatever
     public String type;
 
     @ManyToOne

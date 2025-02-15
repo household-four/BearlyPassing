@@ -2,7 +2,6 @@ NOTES:
 
 TO-DO:
     Need to create wireframes for the different pages and views
-    STOPPED AT Use Cases - Fully Dressed. Continue reading documentation.
     Create a repository to store data
     Add dummy data to repository
     Create services to handle business logic; e.g. teacherservice to assign a game to a student, game service to create or start game, etc

@@ -1,4 +1,4 @@
-package bearly_passing.project;
+package bearly_passing.project.domain;
 
 import jakarta.persistence.ManyToMany;
 

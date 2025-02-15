@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+import bearly_passing.project.api.HomeController;
+
 @WebMvcTest(HomeController.class)   // <1>
 public class HomeControllerTest {
 

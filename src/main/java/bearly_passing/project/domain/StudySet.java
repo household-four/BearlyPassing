@@ -1,4 +1,4 @@
-package bearly_passing.project;
+package bearly_passing.project.domain;
 
 import java.util.List;
 
@@ -26,6 +26,6 @@ public class StudySet {
     private List<Game> games;
 
     @OneToMany(mappedBy = "studySet")
-    private List<StudyItem> studyItems;
+    private List<Question> questions;
 
 }

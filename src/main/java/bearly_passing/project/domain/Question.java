@@ -1,11 +1,11 @@
-package bearly_passing.project;
+package bearly_passing.project.domain;
 
 import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
 @Entity
-public class StudyItem {
+public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

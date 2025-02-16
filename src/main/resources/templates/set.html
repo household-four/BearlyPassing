@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Create Study Set</title>
+  </head>
+  
+  <body>
+    <h1>Current Set</h1>
+
+    <form method="POST" th:action="@{/set}" th:object="${studySet}" >
+        
+        <h3>Questions:</h3>
+        <ul>
+          <li th:each="question : ${studySet.questions}">
+            <span th:text="${question.body}">body: </span>
+            <span th:text="${question.correctAnswer}">answer: </span>
+          </li>
+        </ul>
+
+        <a th:href="@{/question}">Add Question</a>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,136 @@
+{
+	"info": {
+		"_postman_id": "82e9e847-6886-41a7-8bbe-9f455b1b08a1",
+		"name": "Bearly Passing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41971412"
+	},
+	"item": [
+		{
+			"name": "POST New Teacher",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/teacher/create?name=Teacher1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"teacher",
+						"create"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Teacher1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST New Student",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/student/create?name=Student2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"student",
+						"create"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Student2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Add Student to Teacher",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/teacher/1/add-student/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"teacher",
+						"1",
+						"add-student",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET All Users",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Populate",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/populate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"populate"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,9 +1,13 @@
 package bearly_passing.project.domain;
 
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -13,9 +17,11 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class Student extends User {
     @ManyToMany(mappedBy = "students")
+    @JsonBackReference
     private List<Teacher> teachers;
 
-    public void playGame(GameSession game) {
-        game.startGame(this);
-    }
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
+    private List<GameSession> assignedGames;
+
 }

@@ -8,6 +8,7 @@ import lombok.Data;
 
 @Data
 @Entity
+@Table(name = "users") // required since 'user' is a reserved keyword
 @Inheritance(strategy = InheritanceType.JOINED) // makes separate student/teacher tables
 public class User {
     @Id

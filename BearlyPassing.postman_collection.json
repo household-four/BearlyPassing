@@ -108,6 +108,29 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "POST Populate",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/populate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"populate"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

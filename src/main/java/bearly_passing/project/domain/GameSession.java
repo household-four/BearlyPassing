@@ -1,5 +1,7 @@
 package bearly_passing.project.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -16,15 +18,11 @@ public class GameSession {
 
     @ManyToOne
     @JoinColumn(name = "student_id")
+    @JsonManagedReference
     private Student student;
 
     private int score;
 
     private boolean completed;
-
-    public void startGame(Student student) {
-        // TODO: add game logic
-        System.out.println(student.getName() + " is starting " + game.type + " game.");
-    }
 
 }

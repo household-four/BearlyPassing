@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import bearly_passing.project.domain.GameSession;
 import bearly_passing.project.domain.Teacher;
 import bearly_passing.project.services.UserService;
 
@@ -38,8 +39,13 @@ public class TeacherController {
         return ResponseEntity.ok("Student added successfully!");
     }
 
-    // POST /teacher/{id}/assign-study-set/{study-set-id}
-    public void assignStudySet(Long studentId, Long studySetId) {
+    @PostMapping("/{teacherId}/assign-game/{studentId}/{gameId}")
+    public ResponseEntity<GameSession> assignGameToStudent(
+            @PathVariable Long teacherId,
+            @PathVariable Long studentId,
+            @PathVariable Long gameId) {
+        GameSession gameSession = userService.assignGameToStudent(teacherId, studentId, gameId);
+        return ResponseEntity.ok(gameSession);
     }
 
     // POST /teacher/{id}/share-study-set/{study-set-id}

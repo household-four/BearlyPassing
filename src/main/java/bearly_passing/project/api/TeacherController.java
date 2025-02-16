@@ -3,6 +3,8 @@ package bearly_passing.project.api;
 import java.nio.file.Path;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -26,6 +28,14 @@ public class TeacherController {
         teacher.setName(name);
 
         return userService.createUser(teacher);
+    }
+
+    @PostMapping("/{teacherId}/add-student/{studentId}")
+    public ResponseEntity<String> addStudentToTeacher(
+            @PathVariable Long teacherId,
+            @PathVariable Long studentId) {
+        userService.addStudentToTeacher(teacherId, studentId);
+        return ResponseEntity.ok("Student added successfully!");
     }
 
     // POST /teacher/{id}/assign-study-set/{study-set-id}

@@ -14,8 +14,4 @@ import lombok.EqualsAndHashCode;
 public class Student extends User {
     @ManyToMany(mappedBy = "students")
     private List<Teacher> teachers;
-
-    public void playGame(GameSession game) {
-        game.startGame(this);
-    }
 }

@@ -1,7 +1,9 @@
 package bearly_passing.project.domain;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
+@Data
 @Entity
 public class GameSession {
     @Id

@@ -18,6 +18,7 @@ public class User {
     private String name;
 
     @OneToMany(mappedBy = "creator")
+    
     private List<StudySet> studySets;
 
 }

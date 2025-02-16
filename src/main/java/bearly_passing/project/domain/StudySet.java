@@ -1,5 +1,6 @@
 package bearly_passing.project.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.GeneratedValue;
@@ -13,6 +14,7 @@ import lombok.Data;
 @Data
 @Entity
 public class StudySet {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,6 +28,14 @@ public class StudySet {
     private List<Game> games;
 
     @OneToMany(mappedBy = "studySet")
-    private List<Question> questions;
+    private List<Question> questions = new ArrayList<>();
+
+    public void addQuestion(Question question) {
+        questions.add(question);
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
 
 }

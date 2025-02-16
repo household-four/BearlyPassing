@@ -10,8 +10,8 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String body;
-    private String correctAnswer;
+    private String body = "";
+    private String correctAnswer = "";
     private String givenAnswer;
     private Difficulty difficulty;
 

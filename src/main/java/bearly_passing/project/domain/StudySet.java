@@ -3,6 +3,9 @@ package bearly_passing.project.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -27,6 +30,7 @@ public class StudySet {
     @OneToMany(mappedBy = "studySet")
     private List<Game> games;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "studySet")
     private List<Question> questions = new ArrayList<>();
 

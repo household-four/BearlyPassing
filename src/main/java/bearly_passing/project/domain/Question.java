@@ -1,5 +1,7 @@
 package bearly_passing.project.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -15,6 +17,7 @@ public class Question {
     private String givenAnswer;
     private Difficulty difficulty;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "studyset_id")
     private StudySet studySet;

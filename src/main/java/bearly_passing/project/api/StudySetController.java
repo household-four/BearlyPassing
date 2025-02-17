@@ -1,8 +1,15 @@
 package bearly_passing.project.api;
 
 import org.springframework.web.bind.annotation.SessionAttributes;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -27,26 +34,19 @@ public class StudySetController {
     public String getMethodName() {
         return "set";
     }
-    
 
-    @PostMapping
-    public String questionSubmit(StudySet studySet) {
-        studySetRepository.save(studySet);
-        return "redirect:/create";
+    @PostMapping("/save")
+    public void saveStudySet(@ModelAttribute("studySet") StudySet studySet) {
+        try {
+            String home = System.getProperty("user.home");
+            Path path = Paths.get(home, "Downloads", studySet.getName() + ".json");
+
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.writeValue(path.toFile(), studySet);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
-    // // POST /study-set/create
-    // public void createQuestionSet(String name) {}
-
-    // // POST /study-set/{id}/add-question
-    // public void addQuestion(Long questionSetId, String question, String answer) {}
-
-    // // GET /study-set/{id}/questions
-    // public void getQuestions(Long questionSetId) {}
-
-    // // POST /study-set/{id}/edit-question/{question-id}
-    // public void editQuestion(Long questionId, String question, String answer) {}
-
-    // // POST /study-set/{id}/delete-question/{question-id}
-    // public void deleteQuestion(Long questionId) {}
 }

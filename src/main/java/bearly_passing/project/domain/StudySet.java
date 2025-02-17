@@ -1,6 +1,5 @@
 package bearly_passing.project.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -32,7 +31,7 @@ public class StudySet {
 
     @OneToMany
     @JsonManagedReference
-    private List<Question> questions = new ArrayList<>();
+    private List<Question> questions;
 
     public long getID() {
         return id;
@@ -62,6 +61,9 @@ public class StudySet {
     }
 
     public List<Question> getQuestions() {
+        if (questions == null) {
+            questions = new ArrayList<Question>();
+        }
         return questions;
     }
 

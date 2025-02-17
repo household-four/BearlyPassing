@@ -34,19 +34,6 @@ public class GameService {
 
     @Transactional
     public String viewQuestion(long studentID, long studysetID, long gameID, long questionID) {
-        GameSession gameSession = new GameSession();
-        
-        Game game = (Game) em.createQuery("SELECT g FROM Game g WHERE g.id = :id", Game.class)
-            .setParameter("id", gameID)
-            .getResultList().get(0);
-        gameSession.setGame(game);
-        Student student = (Student) em.createQuery("SELECT s FROM Student s WHERE s.id = :id", Student.class)
-            .setParameter("id", studentID)
-            .getResultList().get(0);
-        gameSession.setStudent(student);
-
-        em.persist(gameSession);
-
         return em.createQuery("SELECT q FROM Question q WHERE q.studySet.id = :id", Question.class)
             .setParameter("id", studysetID)
             .getResultList().get(0)

@@ -61,6 +61,7 @@ public class UserService {
         return teacher;
     }
 
+    @Transactional
     public GameSession assignGameToStudent(Long teacherId, Long studentId, Long gameId) {
         Teacher teacher = (Teacher) userRepository.findById(teacherId)
                 .orElseThrow(() -> new RuntimeException("Teacher not found"));

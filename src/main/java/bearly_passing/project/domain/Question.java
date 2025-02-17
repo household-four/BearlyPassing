@@ -1,6 +1,7 @@
 package bearly_passing.project.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -15,9 +16,11 @@ public class Question {
     private String body = "";
     private String correctAnswer = "";
     private String givenAnswer;
+
+    @Enumerated(EnumType.STRING)
     private Difficulty difficulty;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "studyset_id")
     private StudySet studySet;

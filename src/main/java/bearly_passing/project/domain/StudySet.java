@@ -32,18 +32,7 @@ public class StudySet {
 
     @OneToMany
     @JsonManagedReference
-    private List<Question> questions;
-
-    @OneToMany(mappedBy = "studySet")
     private List<Question> questions = new ArrayList<>();
-
-    public void addQuestion(Question question) {
-        questions.add(question);
-    }
-
-    public List<Question> getQuestions() {
-        return questions;
-    }
 
     public long getID() {
         return id;
@@ -73,9 +62,6 @@ public class StudySet {
     }
 
     public List<Question> getQuestions() {
-        if (questions == null) {
-            questions = new ArrayList<Question>();
-        }
         return questions;
     }
 

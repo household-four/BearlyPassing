@@ -8,17 +8,25 @@ import org.springframework.stereotype.Service;
 import bearly_passing.project.data.GameRepository;
 import bearly_passing.project.data.GameSessionRepository;
 import bearly_passing.project.data.UserRepository;
+import bearly_passing.project.domain.Question;
 import bearly_passing.project.domain.Game;
 import bearly_passing.project.domain.GameSession;
 import bearly_passing.project.domain.Student;
+import bearly_passing.project.domain.StudySet;
 import bearly_passing.project.domain.Teacher;
 import bearly_passing.project.domain.User;
 import jakarta.transaction.Transactional;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 
 @Service
 public class UserService {
+
     @Autowired
     private UserRepository userRepository;
+
+    @PersistenceContext
+    private EntityManager em;
 
     @Autowired
     private GameRepository gameRepository;

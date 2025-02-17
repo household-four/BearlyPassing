@@ -22,16 +22,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 // @SessionAttributes("studySet")
 public class QuestionController {
 
+    // TODO: Maybe remove? I think Christen added this in conflict with my additions
+
     // create study set icon
     // upload existing || new set || canvas import
 
     @Autowired
     private StudySetService studySetService;
 
-    @GetMapping
-    public String showQuestionForm() {
-        return "question";
-    }
+    // @GetMapping
+    // public String showQuestionForm() {
+    // return "question";
+    // }
 
     // @PostMapping
     // public String addQuestion(@ModelAttribute StudySet studySet, Question

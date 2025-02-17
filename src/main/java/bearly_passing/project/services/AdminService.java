@@ -7,8 +7,13 @@ import org.springframework.stereotype.Service;
 
 import bearly_passing.project.data.GameRepository;
 import bearly_passing.project.data.GameSessionRepository;
+import bearly_passing.project.data.QuestionRepository;
+import bearly_passing.project.data.StudySetRepository;
 import bearly_passing.project.data.UserRepository;
+import bearly_passing.project.domain.Game;
+import bearly_passing.project.domain.Question;
 import bearly_passing.project.domain.Student;
+import bearly_passing.project.domain.StudySet;
 import bearly_passing.project.domain.Teacher;
 import jakarta.transaction.Transactional;
 
@@ -16,6 +21,12 @@ import jakarta.transaction.Transactional;
 public class AdminService {
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private QuestionRepository questionRepository;
+
+    @Autowired
+    private StudySetRepository studySetRepository;
 
     @Autowired
     private GameRepository gameRepository;
@@ -56,8 +67,24 @@ public class AdminService {
         userRepository.saveAll(Arrays.asList(student1, student2, student3, student4, student5));
         userRepository.saveAll(Arrays.asList(teacher1, teacher2, teacher3));
 
-        // TODO: Make questions, studysets, games, and assign them to users
+        Question question = new Question();
+        question.setBody("What color is the sky?");
+        question.setCorrectAnswer("blue");
+
+        StudySet studySet = new StudySet();
+        studySet.getQuestions().add(question);
+
+        Game game = new Game();
+        game.setStudySet(studySet);
+
+        question.setStudySet(studySet);
+        studySet.getGames().add(game);
+
+        questionRepository.save(question);
+        studySetRepository.save(studySet);
+        gameRepository.save(game);
 
         System.out.println("Dummy data populated successfully!");
     }
+
 }

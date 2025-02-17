@@ -1,5 +1,6 @@
 package bearly_passing.project.domain;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Entity;
+
 import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Data
 @Entity
@@ -19,7 +22,7 @@ public class StudySet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     private String name;
 
@@ -40,6 +43,9 @@ public class StudySet {
     }
 
     public List<Question> getQuestions() {
+        if (questions == null) {
+            questions = new ArrayList<Question>();
+        }
         return questions;
     }
 

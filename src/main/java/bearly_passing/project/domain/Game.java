@@ -34,4 +34,12 @@ public class Game {
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<GameSession> sessions;
 
+    public StudySet getStudySet() {
+        return studySet;
+    }
+
+    public void setStudySet(StudySet studySet) {
+        this.studySet = studySet;
+    }
+
 }

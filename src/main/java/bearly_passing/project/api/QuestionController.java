@@ -16,25 +16,28 @@ import org.springframework.web.bind.annotation.PostMapping;
 @SessionAttributes("studySet")
 public class QuestionController {
 
+    // TODO: Maybe remove? I think Christen added this in conflict with my additions
+
     // create study set icon
     // upload existing || new set || canvas import
 
-    @GetMapping
-    public String showQuestionForm() {
-        return "question";
-    }
+    // @GetMapping
+    // public String showQuestionForm() {
+    // return "question";
+    // }
 
-    @PostMapping
-    public String addQuestion(@ModelAttribute StudySet studySet, Question question) {
-        studySet.addQuestion(question);    
-        return "redirect:/set/current";
-    }
+    // @PostMapping
+    // public String addQuestion(@ModelAttribute StudySet studySet, Question
+    // question) {
+    // studySet.addQuestion(question);
+    // return "redirect:/set/current";
+    // }
 
     @ModelAttribute(name = "question")
     public Question question() {
         return new Question();
     }
-    
+
     @ModelAttribute(name = "studySet")
     public StudySet studySet() {
         return new StudySet();

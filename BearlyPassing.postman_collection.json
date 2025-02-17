@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "82e9e847-6886-41a7-8bbe-9f455b1b08a1",
+		"_postman_id": "7de18746-e54a-46c3-af77-efefbc13a48b",
 		"name": "Bearly Passing",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "41971412"
+		"_exporter_id": "41998164"
 	},
 	"item": [
 		{
@@ -127,6 +127,84 @@
 					"path": [
 						"admin",
 						"populate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST View Question",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/1/1/game/1/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"1",
+						"1",
+						"game",
+						"1",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Answer Question Right",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/1/1/game/1/1?answer=blue",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"1",
+						"1",
+						"game",
+						"1",
+						"1"
+					],
+					"query": [
+						{
+							"key": "answer",
+							"value": "blue"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Answer Question Wrong",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/1/1/game/1/1?answer=yellow",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"1",
+						"1",
+						"game",
+						"1",
+						"1"
+					],
+					"query": [
+						{
+							"key": "answer",
+							"value": "yellow"
+						}
 					]
 				}
 			},

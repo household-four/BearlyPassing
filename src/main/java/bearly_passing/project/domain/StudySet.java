@@ -38,6 +38,29 @@ public class StudySet {
     @OneToMany(mappedBy = "studySet")
     private List<Question> questions = new ArrayList<>();
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
+
+    public List<Game> getGames() {
+        if (games == null) {
+            games = new ArrayList<Game>();
+        }
+        return games;
+    }
+    
     public void addQuestion(Question question) {
         questions.add(question);
     }

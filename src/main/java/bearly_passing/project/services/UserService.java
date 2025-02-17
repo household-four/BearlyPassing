@@ -1,6 +1,5 @@
 package bearly_passing.project.services;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,6 @@ import jakarta.transaction.Transactional;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
-
 @Service
 public class UserService {
 
@@ -29,7 +27,7 @@ public class UserService {
 
     @PersistenceContext
     private EntityManager em;
-    
+
     @Autowired
     private GameRepository gameRepository;
 
@@ -89,59 +87,6 @@ public class UserService {
         userRepository.save(student);
 
         return gameSession;
-    }
-
-    @Transactional
-    public void populateDummyData() {
-        Teacher teacher1 = new Teacher();
-        teacher1.setName("Mr. Smith");
-
-        Teacher teacher2 = new Teacher();
-        teacher2.setName("Ms. Johnson");
-
-        Teacher teacher3 = new Teacher();
-        teacher3.setName("Dr. Brown");
-
-        Student student1 = new Student();
-        student1.setName("Christen");
-
-        Student student2 = new Student();
-        student2.setName("Matthew");
-
-        Student student3 = new Student();
-        student3.setName("Kevin");
-
-        Student student4 = new Student();
-        student4.setName("Faizan");
-
-        Student student5 = new Student();
-        student5.setName("Joshua");
-
-        teacher1.setStudents(Arrays.asList(student1, student2));
-        teacher2.setStudents(Arrays.asList(student3, student4));
-        teacher3.setStudents(Arrays.asList(student5));
-
-        userRepository.saveAll(Arrays.asList(student1, student2, student3, student4, student5));
-        userRepository.saveAll(Arrays.asList(teacher1, teacher2, teacher3));
-
-        Question question = new Question();
-        question.setBody("What color is the sky?");
-        question.setCorrectAnswer("blue");
-
-        StudySet studySet = new StudySet();
-        studySet.getQuestions().add(question);
-
-        Game game = new Game();
-        game.setStudySet(studySet);
-
-        question.setStudySet(studySet);
-        studySet.getGames().add(game);
-        
-        em.persist(question);
-        em.persist(studySet);
-        em.persist(game);
-
-        System.out.println("Dummy data populated successfully!");
     }
 
 }

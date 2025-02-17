@@ -23,37 +23,24 @@ public class QuestionController {
 
     // @GetMapping
     // public String showQuestionForm() {
-    //     return "question";
+    // return "question";
     // }
 
     // @PostMapping
-    // public String addQuestion(@ModelAttribute StudySet studySet, Question question) {
-    //     studySet.addQuestion(question);    
-    //     return "redirect:/set/current";
+    // public String addQuestion(@ModelAttribute StudySet studySet, Question
+    // question) {
+    // studySet.addQuestion(question);
+    // return "redirect:/set/current";
     // }
 
-    // @ModelAttribute(name = "question")
-    // public Question question() {
-    //     return new Question();
-    // }
-    // 
-    // @ModelAttribute(name = "studySet")
-    // public StudySet studySet() {
-    //     return new StudySet();
-    // }
-    
-    // // POST /study-set/create
-    // public void createQuestionSet(String name) {}
+    @ModelAttribute(name = "question")
+    public Question question() {
+        return new Question();
+    }
 
-    // // POST /study-set/{id}/add-question
-    // public void addQuestion(Long questionSetId, String question, String answer) {}
+    @ModelAttribute(name = "studySet")
+    public StudySet studySet() {
+        return new StudySet();
+    }
 
-    // // GET /study-set/{id}/questions
-    // public void getQuestions(Long questionSetId) {}
-
-    // // POST /study-set/{id}/edit-question/{question-id}
-    // public void editQuestion(Long questionId, String question, String answer) {}
-
-    // // POST /study-set/{id}/delete-question/{question-id}
-    // public void deleteQuestion(Long questionId) {}
 }

@@ -19,6 +19,12 @@
         </ul>
 
         <a th:href="@{/question}">Add Question</a>
+
+        
+        <form method="POST" th:action="@{/set/save}">
+          <button type="submit">Save Study Set</button>
+        </form>
+
     </form>
   </body>
 </html>

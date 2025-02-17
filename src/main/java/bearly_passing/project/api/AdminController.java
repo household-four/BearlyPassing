@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import bearly_passing.project.domain.User;
+import bearly_passing.project.services.AdminService;
 import bearly_passing.project.services.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -19,6 +20,9 @@ public class AdminController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private AdminService adminService;
+
     @GetMapping("/users")
     public List<User> getAllUsers() {
         return userService.getAllUsers();
@@ -26,7 +30,7 @@ public class AdminController {
 
     @PostMapping("/populate")
     public ResponseEntity<String> populateDummyData() {
-        userService.populateDummyData();
+        adminService.populateDummyData();
         return ResponseEntity.ok("Dummy data populated successfully!");
     }
 

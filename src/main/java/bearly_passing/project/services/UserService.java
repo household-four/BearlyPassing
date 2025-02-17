@@ -13,6 +13,7 @@ import bearly_passing.project.domain.Question;
 import bearly_passing.project.domain.Game;
 import bearly_passing.project.domain.GameSession;
 import bearly_passing.project.domain.Student;
+import bearly_passing.project.domain.StudySet;
 import bearly_passing.project.domain.Teacher;
 import bearly_passing.project.domain.User;
 import jakarta.transaction.Transactional;
@@ -58,14 +59,6 @@ public class UserService {
         }
 
         return teacher;
-    }
-
-    @Transactional
-    public List<Question> takeQuiz(long studysetID, String gameType) {
-        return em.createQuery("SELECT g.studyset_id FROM Game g WHERE g.studyset_id = :id AND g.type = :type", Question.class)
-            .setParameter("id", studysetID)
-            .setParameter("type", gameType)
-            .getResultList().get(0);
     }
 
     public GameSession assignGameToStudent(Long teacherId, Long studentId, Long gameId) {
@@ -129,6 +122,25 @@ public class UserService {
 
         userRepository.saveAll(Arrays.asList(student1, student2, student3, student4, student5));
         userRepository.saveAll(Arrays.asList(teacher1, teacher2, teacher3));
+
+        Question question = new Question();
+        question.setBody("What color is the sky?");
+        question.setCorrectAnswer("blue");
+
+        StudySet studySet = new StudySet();
+        studySet.getQuestions().add(question);
+
+        Game game = new Game();
+        game.setStudySet(studySet);
+
+        question.setStudySet(studySet);
+        studySet.getGames().add(game);
+        
+        em.persist(question);
+        em.persist(studySet);
+        em.persist(game);
+
         System.out.println("Dummy data populated successfully!");
     }
+
 }

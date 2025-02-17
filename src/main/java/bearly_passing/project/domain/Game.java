@@ -2,6 +2,8 @@ package bearly_passing.project.domain;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,13 +27,16 @@ public class Game {
 
     @ManyToOne
     @JoinColumn(name = "studyset_id")
+    @JsonIgnore
     private StudySet studySet;
 
     @ManyToOne
     @JoinColumn(name = "creator_id")
+    @JsonIgnore
     private User creator;
 
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<GameSession> sessions;
 
     public StudySet getStudySet() {

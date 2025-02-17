@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "82e9e847-6886-41a7-8bbe-9f455b1b08a1",
+		"_postman_id": "3ad02407-942b-4b5f-9945-f0fbc4361a08",
 		"name": "Bearly Passing",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "41971412"
+		"_exporter_id": "41971743"
 	},
 	"item": [
 		{
@@ -141,7 +141,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/set/create?name=Biology 101&userId=1",
+					"raw": "http://localhost:8080/set/create?name=Biology_101&userId=1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -154,7 +154,7 @@
 					"query": [
 						{
 							"key": "name",
-							"value": "Biology 101"
+							"value": "Biology_101"
 						},
 						{
 							"key": "userId",
@@ -198,6 +198,64 @@
 					"path": [
 						"question",
 						"add"
+					],
+					"query": [
+						{
+							"key": "studySetId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Export StudySet",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/set/export?studySetId=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"set",
+						"export"
+					],
+					"query": [
+						{
+							"key": "studySetId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Import Set",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/set/import?studySetId=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"set",
+						"import"
 					],
 					"query": [
 						{

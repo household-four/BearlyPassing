@@ -83,6 +83,8 @@ Classes/Methods Extracted from Use Cases:
         monitor question contents according to school guidelines.
 
     User wants:
+        // system autosaves by default
+        
         whenever viewing a question set (that you control), 
             can see pencil for editing,
             trash for deleting, 

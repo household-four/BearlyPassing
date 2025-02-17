@@ -12,6 +12,9 @@ public class Question {
 
     private String body;
     private String correctAnswer;
+    private String body = "";
+    private String correctAnswer = "";
+    private String givenAnswer;
     private Difficulty difficulty;
 
     @ManyToOne

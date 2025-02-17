@@ -1,5 +1,6 @@
 package bearly_passing.project.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -16,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Data
 @Entity
 public class StudySet {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -31,6 +33,17 @@ public class StudySet {
     @OneToMany
     @JsonManagedReference
     private List<Question> questions;
+
+    @OneToMany(mappedBy = "studySet")
+    private List<Question> questions = new ArrayList<>();
+
+    public void addQuestion(Question question) {
+        questions.add(question);
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
 
     public long getID() {
         return id;

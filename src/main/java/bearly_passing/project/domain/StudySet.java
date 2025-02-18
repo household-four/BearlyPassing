@@ -2,6 +2,9 @@ package bearly_passing.project.domain;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,19 +29,16 @@ public class StudySet {
     private String name;
 
     @ManyToOne
+    @JsonIgnore
     private User creator;
 
-    @OneToMany
     @JsonIgnore
+    @OneToMany(mappedBy = "studySet")
     private List<Game> games;
 
-    @OneToMany
-    @JsonManagedReference
-    private List<Question> questions;
-
-    public long getID() {
-        return id;
-    }
+    @JsonIgnore
+    @OneToMany(mappedBy = "studySet")
+    private List<Question> questions = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -61,6 +61,10 @@ public class StudySet {
             games = new ArrayList<Game>();
         }
         return games;
+    }
+
+    public void addQuestion(Question question) {
+        questions.add(question);
     }
 
     public List<Question> getQuestions() {

@@ -14,6 +14,8 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Entity;
 
 import lombok.Data;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Data
@@ -60,7 +62,7 @@ public class StudySet {
         }
         return games;
     }
-    
+
     public void addQuestion(Question question) {
         questions.add(question);
     }

@@ -1,12 +1,18 @@
 package bearly_passing.project.api;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import bearly_passing.project.domain.GameSession;
 import bearly_passing.project.domain.Student;
+import bearly_passing.project.domain.User;
+import bearly_passing.project.services.GameService;
 import bearly_passing.project.services.UserService;
 
 @RestController
@@ -16,12 +22,20 @@ public class StudentController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private GameService gameService;
+
     @PostMapping("/create")
     public Student createStudent(@RequestParam String name) {
         Student student = new Student();
         student.setName(name);
 
         return userService.createUser(student);
+    }
+
+    @GetMapping("/my-games")
+    public List<GameSession> getMyGameSessions(@RequestParam Long studentId) {
+        return gameService.getMyGameSessions(studentId);
     }
 
     // GET /student/{id}/study-sets

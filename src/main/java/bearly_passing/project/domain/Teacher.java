@@ -16,4 +16,8 @@ public class Teacher extends User {
     @ManyToMany
     @JsonManagedReference
     private List<Student> students;
+
+    public List<Student> getStudents() {
+        return students;
+    }
 }

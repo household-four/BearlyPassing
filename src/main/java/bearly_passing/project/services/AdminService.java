@@ -1,6 +1,7 @@
 package bearly_passing.project.services;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,18 +48,23 @@ public class AdminService {
 
         Student student1 = new Student();
         student1.setName("Christen");
+        student1.setGrade(100.0f);
 
         Student student2 = new Student();
         student2.setName("Matthew");
+        student1.setGrade(100.0f);
 
         Student student3 = new Student();
         student3.setName("Kevin");
+        student1.setGrade(100.0f);
 
         Student student4 = new Student();
         student4.setName("Faizan");
+        student1.setGrade(100.0f);
 
         Student student5 = new Student();
         student5.setName("Joshua");
+        student1.setGrade(100.0f);
 
         teacher1.setStudents(Arrays.asList(student1, student2));
         teacher2.setStudents(Arrays.asList(student3, student4));
@@ -85,6 +91,28 @@ public class AdminService {
         gameRepository.save(game);
 
         System.out.println("Dummy data populated successfully!");
+    }
+
+    @Transactional
+    public String studentGrade(Long studentID) {
+        Student student = (Student) userRepository.findById(studentID)
+            .orElseThrow(() -> new RuntimeException("Student not found"));
+
+        return student.getName() + ": " + student.getGrade();
+    }
+
+    @Transactional
+    public String teacherClass(Long teacherID) {
+        Teacher teacher = (Teacher) userRepository.findById(teacherID)
+            .orElseThrow(() -> new RuntimeException("Teacher not found"));
+
+        String out = "Teacher: " + teacher.getName() + "\n\nStudents:\n";
+
+        for (Student student : teacher.getStudents()) {
+            out += student.getName() + "\n";
+        }
+
+        return out;
     }
 
 }

@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "9fd79510-8d8f-4b75-bb92-b2f9ed73364c",
-		"name": "Bearly Passing Copy",
+		"_postman_id": "7de18746-e54a-46c3-af77-efefbc13a48b",
+		"name": "Bearly Passing",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "41971412"
+		"_exporter_id": "41998164"
 	},
 	"item": [
 		{
@@ -133,83 +133,6 @@
 			"response": []
 		},
 		{
-			"name": "POST New StudySet",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "POST",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/set/create?name=Biology 101&userId=1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"set",
-						"create"
-					],
-					"query": [
-						{
-							"key": "name",
-							"value": "Biology 101"
-						},
-						{
-							"key": "userId",
-							"value": "1"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "POST Add Q to StudySet",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"body\": \"What is the powerhouse of the cell?\",\r\n    \"correctAnswer\": \"Mitochondria\",\r\n    \"difficulty\": \"EASY\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/question/add?studySetId=1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"question",
-						"add"
-					],
-					"query": [
-						{
-							"key": "studySetId",
-							"value": "1"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "POST View Question",
 			"request": {
 				"method": "POST",
@@ -232,7 +155,7 @@
 			"response": []
 		},
 		{
-			"name": "POST Answer Question Right",
+			"name": "POST Answe Question Right",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -260,7 +183,7 @@
 			"response": []
 		},
 		{
-			"name": "POST Answer Question Wrong",
+			"name": "POST Answe Question Wrong",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -288,59 +211,7 @@
 			"response": []
 		},
 		{
-			"name": "POST New Game",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "POST",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/teacher/create-game/1/3/matching",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"teacher",
-						"create-game",
-						"1",
-						"3",
-						"matching"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "POST Assign Game to Student",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "POST",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/teacher/7/assign-game/4/2",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"teacher",
-						"7",
-						"assign-game",
-						"4",
-						"2"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GET My Assigned Games",
+			"name": "GET Admin View Grade",
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -348,20 +219,47 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/student/my-games?studentId=4",
-					"protocol": "http",
+					"raw": "localhost:8080/admin/grades?studentID=3",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"student",
-						"my-games"
+						"admin",
+						"grades"
 					],
 					"query": [
 						{
-							"key": "studentId",
-							"value": "4"
+							"key": "studentID",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Admin View Class",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/admin/class?teacherID=8",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"class"
+					],
+					"query": [
+						{
+							"key": "teacherID",
+							"value": "8"
 						}
 					]
 				}

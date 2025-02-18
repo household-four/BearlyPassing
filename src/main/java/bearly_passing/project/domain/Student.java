@@ -24,4 +24,14 @@ public class Student extends User {
     @JsonBackReference
     private List<GameSession> assignedGames;
 
+    private float grade;
+
+    public float getGrade() {
+        return grade;
+    }
+
+    public void setGrade(float grade) {
+        this.grade = grade;
+    }
+
 }

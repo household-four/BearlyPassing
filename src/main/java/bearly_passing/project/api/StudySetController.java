@@ -1,52 +1,54 @@
 package bearly_passing.project.api;
 
-import org.springframework.web.bind.annotation.SessionAttributes;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
-import bearly_passing.project.data.StudySetRepository;
 import bearly_passing.project.domain.StudySet;
+import bearly_passing.project.domain.User;
+import bearly_passing.project.services.StudySetService;
 
-@Controller
+@RestController
 @RequestMapping("/set")
-@SessionAttributes("studySet")
-public class StudySetController {
+public class StudySetController<Question> {
 
-    private final StudySetRepository studySetRepository;
+    @Autowired 
+    private StudySetService studySetService;
 
-    public StudySetController(StudySetRepository studySetRepository) {
-        this.studySetRepository = studySetRepository;
+    @PostMapping("/export")
+    public void exportStudySet(@RequestParam Long studySetId) {
+        studySetService.saveStudySet(studySetId);
     }
 
-    // create study set icon
-    // upload existing || new set || canvas import
-
-    @GetMapping("/current")
-    public String getMethodName() {
-        return "set";
+    @PostMapping("/import")
+    public StudySet importStudySet(@RequestParam Long studySetId) throws IOException {
+        return studySetService.loadStudySet(studySetId);
     }
 
-    @PostMapping("/save")
-    public void saveStudySet(@ModelAttribute("studySet") StudySet studySet) {
-        try {
-            String home = System.getProperty("user.home");
-            Path path = Paths.get(home, "Downloads", studySet.getName() + ".json");
-
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.writeValue(path.toFile(), studySet);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    @PostMapping("/canvas")
+    public StudySet importCanvasSet(@RequestParam String canvasFile) throws IOException {
+        return studySetService.loadCanvasSet(canvasFile);
     }
-    
+
+    // For saving new study set to database
+    @PostMapping("/create")
+    public StudySet createStudySet(@RequestParam String name, @RequestParam Long userId) {
+        // for now, uses userId as a request param
+        // since we dont know who the current user is
+        return studySetService.createNewStudySet(name, userId);
+    }
+
+    @GetMapping("/sets")
+    public List<StudySet> getAllStudySets() {
+        return studySetService.getAllStudySets();
+    }
+
 }

@@ -265,6 +265,75 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "POST Import Canvas Quiz",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/set/canvas?canvasFile=example",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"set",
+						"canvas"
+					],
+					"query": [
+						{
+							"key": "canvasFile",
+							"value": "example"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET All Sets",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/set/sets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"set",
+						"sets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET All Questions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/question/questions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"question",
+						"questions"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

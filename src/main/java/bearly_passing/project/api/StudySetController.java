@@ -1,6 +1,8 @@
 package bearly_passing.project.api;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,11 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import bearly_passing.project.domain.StudySet;
+import bearly_passing.project.domain.User;
 import bearly_passing.project.services.StudySetService;
 
 @RestController
 @RequestMapping("/set")
-public class StudySetController {
+public class StudySetController<Question> {
 
     @Autowired 
     private StudySetService studySetService;
@@ -25,9 +28,14 @@ public class StudySetController {
         studySetService.saveStudySet(studySetId);
     }
 
-    @GetMapping("/import")
+    @PostMapping("/import")
     public StudySet importStudySet(@RequestParam Long studySetId) throws IOException {
         return studySetService.loadStudySet(studySetId);
+    }
+
+    @PostMapping("/canvas")
+    public StudySet importCanvasSet(@RequestParam String canvasFile) throws IOException {
+        return studySetService.loadCanvasSet(canvasFile);
     }
 
     // For saving new study set to database
@@ -36,6 +44,11 @@ public class StudySetController {
         // for now, uses userId as a request param
         // since we dont know who the current user is
         return studySetService.createNewStudySet(name, userId);
+    }
+
+    @GetMapping("/sets")
+    public List<StudySet> getAllStudySets() {
+        return studySetService.getAllStudySets();
     }
 
 }

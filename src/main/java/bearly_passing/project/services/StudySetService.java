@@ -5,11 +5,15 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.io.File;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -56,9 +60,54 @@ public class StudySetService {
             throw new RuntimeException("File not found: " + path);
         }
         
+        StudySet new_set;
         try (InputStream input = Files.newInputStream(path)) {
-            return new ObjectMapper().readValue(input, StudySet.class);
+            new_set = new ObjectMapper().readValue(input, StudySet.class);
         }
+
+        for (Question question : new_set.getQuestions()) {
+            questionRepository.save(question);
+        }
+
+        return studySetRepository.save(new_set);
+    }
+
+    @Transactional
+    public StudySet loadCanvasSet(String canvasFile) throws IOException {
+
+        File xml = new File("data/canvasSets/" + canvasFile + ".xml");
+        Document document = Jsoup.parse(xml);
+
+        StudySet studySet = new StudySet();
+        for (Question question : parseForQuestions(document)) {
+            studySet.addQuestion(question);
+            questionRepository.save(question);
+        }
+        
+        return studySetRepository.save(studySet);
+    }
+
+    private ArrayList<Question> parseForQuestions(Document document) {
+        
+        ArrayList<Question> questions = new ArrayList<>();
+
+        for (Element item : document.select("item")) {
+
+            Question question = new Question();
+            
+            question.setBody(item.selectFirst("presentation material mattext").text());
+            
+            String answerId = item.selectFirst("resprocessing respcondition conditionvar varequal").text();
+            for (Element response : item.select("response_label")) {
+                if (response.attr("ident").equals(answerId)) {
+                    question.setAnswer(response.selectFirst("material mattext").text());
+                }
+            }
+        
+            questions.add(question);
+        }
+        
+        return questions;
     }
 
     @Transactional
@@ -84,5 +133,10 @@ public class StudySetService {
         studySet.getQuestions().add(question);
 
         return studySetRepository.save(studySet);
+    }
+
+
+    public List<StudySet> getAllStudySets() {
+        return studySetRepository.findAll();
     }
 }

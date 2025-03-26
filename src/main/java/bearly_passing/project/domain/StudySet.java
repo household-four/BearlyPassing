@@ -1,32 +1,20 @@
 package bearly_passing.project.domain;
 
-import java.util.List;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Entity;
-
-import lombok.Data;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
-@Data
 @Entity
 public class StudySet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
-    private String name;
+    private String title;
+    private String description;
 
     @ManyToOne
     @JsonIgnore
@@ -40,12 +28,25 @@ public class StudySet {
     @OneToMany(mappedBy = "studySet")
     private List<Question> questions = new ArrayList<>();
 
-    public String getName() {
-        return name;
+    
+    public Long getId() {
+        return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public User getCreator() {
@@ -58,20 +59,16 @@ public class StudySet {
 
     public List<Game> getGames() {
         if (games == null) {
-            games = new ArrayList<Game>();
+            games = new ArrayList<>();
         }
         return games;
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
     }
 
     public void addQuestion(Question question) {
         questions.add(question);
     }
-
-    public List<Question> getQuestions() {
-        if (questions == null) {
-            questions = new ArrayList<Question>();
-        }
-        return questions;
-    }
-
 }

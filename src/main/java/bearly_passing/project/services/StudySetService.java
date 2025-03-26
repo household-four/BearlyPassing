@@ -43,7 +43,7 @@ public class StudySetService {
                 .orElseThrow(() -> new RuntimeException("StudySet not found"));
 
         try {
-            new ObjectMapper().writeValue(new File("data/studySets/" + studySet.getName() + ".json"), studySet);
+            new ObjectMapper().writeValue(new File("data/studySets/" + studySet.getTitle() + ".json"), studySet);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -54,7 +54,7 @@ public class StudySetService {
         StudySet studySet = studySetRepository.findById(studySetId)
                 .orElseThrow(() -> new RuntimeException("StudySet not found"));
 
-        Path path = Paths.get("data/studySets/" + studySet.getName() + ".json");
+        Path path = Paths.get("data/studySets/" + studySet.getTitle() + ".json");
 
         if (!Files.exists(path)) {
             throw new RuntimeException("File not found: " + path);
@@ -114,14 +114,14 @@ public class StudySetService {
     public StudySet createNewStudySet(String name, Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("Student not found"));
-
+    
         StudySet studySet = new StudySet();
-        studySet.setName(name);
+        studySet.setTitle(name);
         studySet.setCreator(user);
-
+    
         return studySetRepository.save(studySet);
     }
-
+    
     @Transactional
     public StudySet addQuestionToStudySet(Long studySetId, Question question) {
         StudySet studySet = studySetRepository.findById(studySetId)

@@ -1,26 +1,22 @@
 package bearly_passing.project.api;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import bearly_passing.project.domain.StudySet;
-import bearly_passing.project.domain.User;
+import bearly_passing.project.dto.StudySetDTO;
+import bearly_passing.project.dto.StudySetMapper;
 import bearly_passing.project.services.StudySetService;
 
 @RestController
 @RequestMapping("/set")
-public class StudySetController<Question> {
+public class StudySetController {
 
-    @Autowired 
+    @Autowired
     private StudySetService studySetService;
 
     @PostMapping("/export")
@@ -29,26 +25,28 @@ public class StudySetController<Question> {
     }
 
     @PostMapping("/import")
-    public StudySet importStudySet(@RequestParam Long studySetId) throws IOException {
-        return studySetService.loadStudySet(studySetId);
+    public StudySetDTO importStudySet(@RequestParam Long studySetId) throws IOException {
+        StudySet imported = studySetService.loadStudySet(studySetId);
+        return StudySetMapper.toDTO(imported);
     }
 
     @PostMapping("/canvas")
-    public StudySet importCanvasSet(@RequestParam String canvasFile) throws IOException {
-        return studySetService.loadCanvasSet(canvasFile);
+    public StudySetDTO importCanvasSet(@RequestParam String canvasFile) throws IOException {
+        StudySet canvasSet = studySetService.loadCanvasSet(canvasFile);
+        return StudySetMapper.toDTO(canvasSet);
     }
 
-    // For saving new study set to database
     @PostMapping("/create")
-    public StudySet createStudySet(@RequestParam String name, @RequestParam Long userId) {
-        // for now, uses userId as a request param
-        // since we dont know who the current user is
-        return studySetService.createNewStudySet(name, userId);
+    public StudySetDTO createStudySet(@RequestParam String name, @RequestParam Long userId) {
+        StudySet studySet = studySetService.createNewStudySet(name, userId);
+        return StudySetMapper.toDTO(studySet);
     }
 
     @GetMapping("/sets")
-    public List<StudySet> getAllStudySets() {
-        return studySetService.getAllStudySets();
+    public List<StudySetDTO> getAllStudySets() {
+        return studySetService.getAllStudySets()
+                .stream()
+                .map(StudySetMapper::toDTO)
+                .collect(Collectors.toList());
     }
-
 }

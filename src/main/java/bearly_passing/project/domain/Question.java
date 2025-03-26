@@ -28,10 +28,6 @@ public class Question {
         EASY, MEDIUM, HARD
     }
 
-    public long getID() {
-        return id;
-    }
-
     public String getBody() {
         return body;
     }
@@ -63,4 +59,9 @@ public class Question {
     public void setStudySet(StudySet studySet) {
         this.studySet = studySet;
     }
+
+    public Long getId() {
+        return this.id;
+    }
+    
 }

@@ -1,39 +1,40 @@
 package bearly_passing.project.api;
 
+import bearly_passing.project.domain.Game;
+import bearly_passing.project.dto.GameDTO;
+import bearly_passing.project.dto.GameMapper;
 import bearly_passing.project.services.GameService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
+@RequestMapping("/game")
 public class GameController {
 
+    @Autowired
     private GameService gameService;
 
-    @Autowired
-    public GameController(GameService gameService) {
-        this.gameService = gameService;
+    @GetMapping("/all")
+    public List<GameDTO> getAllGames() {
+        List<Game> games = gameService.getAllGames();
+        return games.stream()
+                .map(GameMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
-    @RequestMapping(value = "/{studentID}/{studysetID}/game/{gameID}/{questionID}", method = RequestMethod.POST )
-    public ResponseEntity gamePlay(
-        @PathVariable(value="studentID") long studentID, 
-        @PathVariable(value="studysetID") long studysetID, 
-        @PathVariable(value="gameID") long gameID, 
-        @PathVariable(value="questionID") long questionID,
-        @RequestParam(required=false) String answer) {
-        if (answer == null) {
-            System.out.println("View Question");
-            return new ResponseEntity(gameService.viewQuestion(studentID, studysetID, gameID, questionID), HttpStatus.OK);
-        }
-        System.out.println("Answer Question");
-        return new ResponseEntity(gameService.answerQuestion(studentID, studysetID, gameID, questionID, answer), HttpStatus.OK);
+    @GetMapping("/{id}")
+    public GameDTO getGameById(@PathVariable Long id) {
+        Game game = gameService.getGameById(id);
+        return GameMapper.toDTO(game);
     }
-    
+
+    @PostMapping("/create")
+    public GameDTO createGame(@RequestBody Game game) {
+        Game savedGame = gameService.saveGame(game);
+        return GameMapper.toDTO(savedGame);
+    }
 }

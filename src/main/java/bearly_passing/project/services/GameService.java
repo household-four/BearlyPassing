@@ -82,4 +82,18 @@ public class GameService {
         return student.getAssignedGames();
 
     }
+
+    public List<Game> getAllGames() {
+        return gameRepository.findAll();
+    }
+    
+    public Game getGameById(Long id) {
+        return gameRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Game not found with id: " + id));
+    }
+    
+    public Game saveGame(Game game) {
+        return gameRepository.save(game);
+    }
+    
 }

@@ -1,41 +1,41 @@
 package bearly_passing.project.api;
 
 import bearly_passing.project.domain.Question;
-import bearly_passing.project.domain.StudySet;
+import bearly_passing.project.dto.QuestionDTO;
+import bearly_passing.project.dto.QuestionMapper;
 import bearly_passing.project.services.QuestionService;
-import bearly_passing.project.services.StudySetService;
-
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/question")
 public class QuestionController {
 
     @Autowired
-    private StudySetService studySetService;
-
-    @Autowired
     private QuestionService questionService;
 
-    @PostMapping("/add")
-    public StudySet addQuestion(
-            @RequestParam Long studySetId,
-            @RequestBody Question question) {
-
-        return studySetService.addQuestionToStudySet(studySetId, question);
+    @GetMapping("/all")
+    public List<QuestionDTO> getAllQuestions() {
+        List<Question> questions = questionService.getAllQuestions();
+        return questions.stream()
+                .map(QuestionMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
-    @GetMapping("/questions")
-    public List<Question> getAllQuestions() {
-        return questionService.getAllQuestions();
+    @PostMapping("/add")
+    public QuestionDTO addQuestion(@RequestBody Question question) {
+        Question saved = questionService.saveQuestion(question);
+        return QuestionMapper.toDTO(saved);
+    }
+
+    @GetMapping("/{id}")
+    public QuestionDTO getQuestionById(@PathVariable Long id) {
+        Question question = questionService.getQuestionById(id);
+        return QuestionMapper.toDTO(question);
     }
 
 }

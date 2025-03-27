@@ -18,4 +18,14 @@ public class QuestionService {
         return questionRepository.findAll();
     }
 
+    public Question saveQuestion(Question question) {
+        return questionRepository.save(question);
+    }
+    
+    public Question getQuestionById(Long id) {
+        return questionRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Question not found with id: " + id));
+    }
+    
+
 }

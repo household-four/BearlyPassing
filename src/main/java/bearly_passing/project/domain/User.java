@@ -18,30 +18,24 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Updated from user to username to match the DTO field name
     private String username;
 
-    // for role-based access like "Student", "Teacher", "Admin", etc.
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
 
     @OneToMany(mappedBy = "creator")
     @JsonBackReference
     private List<StudySet> studySets;
 
-    public String getUsername() {
+    public String getName() {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.username = name;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
+    public String getRoleName() {
+        return role != null ? role.name() : null;
     }
 }
-

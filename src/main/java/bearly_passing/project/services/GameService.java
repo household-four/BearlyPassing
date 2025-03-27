@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import bearly_passing.project.data.GameRepository;
 import bearly_passing.project.data.GameSessionRepository;
+import bearly_passing.project.data.StudentRepository;
 import bearly_passing.project.data.StudySetRepository;
 import bearly_passing.project.data.UserRepository;
 import bearly_passing.project.domain.Question;
@@ -23,6 +24,10 @@ import jakarta.persistence.PersistenceContext;
 
 @Service
 public class GameService {
+
+
+    @Autowired
+    private StudentRepository studentRepository;
 
     @Autowired
     private GameRepository gameRepository;
@@ -76,8 +81,9 @@ public class GameService {
     }
 
     public List<GameSession> getMyGameSessions(Long studentId) {
-        Student student = (Student) userRepository.findById(studentId)
-                .orElseThrow(() -> new RuntimeException("Student not found"));
+        Student student = studentRepository.findById(studentId)
+            .orElseThrow(() -> new RuntimeException("Student not found"));
+    
 
         return student.getAssignedGames();
 

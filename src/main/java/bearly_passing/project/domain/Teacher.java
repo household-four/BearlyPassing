@@ -2,7 +2,7 @@ package bearly_passing.project.domain;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
@@ -16,22 +16,15 @@ import lombok.EqualsAndHashCode;
 public class Teacher extends User {
 
     @ManyToMany
-    @JsonManagedReference
+    @JsonIgnore
     private List<Student> students;
 
-    public List<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(List<Student> students) {
-        this.students = students;
-    }
-
-    // Inherits getUsername(), setUsername(), getRole(), setRole() from User
+    @Override
     public String getName() {
         return getUsername();
     }
 
+    @Override
     public void setName(String name) {
         setUsername(name);
     }

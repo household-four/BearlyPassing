@@ -9,11 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import bearly_passing.project.domain.GameSession;
 import bearly_passing.project.domain.Student;
+import bearly_passing.project.domain.Teacher;
 import bearly_passing.project.domain.User;
 import bearly_passing.project.services.GameService;
 import bearly_passing.project.services.UserService;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 
 @RestController
 @RequestMapping("/student")
@@ -53,4 +58,6 @@ public class StudentController {
     // GET /student/{id}/quiz-feedback/{quiz-id}
     public void getQuizFeedback(Long studentId, Long quizId) {
     }
+
+
 }

@@ -94,4 +94,13 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
     }
 
+    public Student createStudent(Student student) {
+        return userRepository.save(student);
+    }
+    
+    public Teacher createTeacher(Teacher teacher) {
+        return userRepository.save(teacher);
+    }
+    
+
 }

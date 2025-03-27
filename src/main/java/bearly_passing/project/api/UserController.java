@@ -1,5 +1,7 @@
 package bearly_passing.project.api;
 
+import bearly_passing.project.domain.Student;
+import bearly_passing.project.domain.Teacher;
 import bearly_passing.project.domain.User;
 import bearly_passing.project.dto.UserDTO;
 import bearly_passing.project.dto.UserMapper;
@@ -32,9 +34,16 @@ public class UserController {
         return UserMapper.toDTO(user);
     }
 
-    @PostMapping("/create")
-    public UserDTO createUser(@RequestBody User user) {
-        User saved = userService.saveUser(user);
+    @PostMapping("/student/create")
+    public UserDTO createStudent(@RequestBody Student student) {
+        Student saved = userService.createStudent(student);
         return UserMapper.toDTO(saved);
     }
+
+    @PostMapping("/teacher/create")
+    public UserDTO createTeacher(@RequestBody Teacher teacher) {
+     Teacher saved = userService.createTeacher(teacher);
+        return UserMapper.toDTO(saved);
+    }
+
 }

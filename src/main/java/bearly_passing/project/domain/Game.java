@@ -21,9 +21,8 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // I think we had multiple game types considered, so thats what this is. E.g.
-    // "Flashcards", "Matching" or whatever
-    public String type;
+    // Changed this name to match GameDTO
+    private String gameType;
 
     @ManyToOne
     @JoinColumn(name = "studyset_id")
@@ -39,12 +38,11 @@ public class Game {
     @JsonIgnore
     private List<GameSession> sessions;
 
-    public StudySet getStudySet() {
-        return studySet;
-    }
-
     public void setStudySet(StudySet studySet) {
         this.studySet = studySet;
     }
 
+    public User getUser() {
+        return creator;
+    }
 }

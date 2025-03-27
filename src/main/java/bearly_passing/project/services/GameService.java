@@ -69,7 +69,7 @@ public class GameService {
 
         Game game = new Game();
         game.setCreator(user);
-        game.setType(type);
+        game.setGameType(type);
         game.setStudySet(studySet);
 
         return gameRepository.save(game);

@@ -30,7 +30,7 @@ public class StudentController {
         Student student = new Student();
         student.setName(name);
 
-        return userService.createUser(student);
+        return userService.saveUser(student);
     }
 
     @GetMapping("/my-games")

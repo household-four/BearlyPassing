@@ -34,7 +34,7 @@ public class UserService {
     @Autowired
     private GameSessionRepository gameSessionRepository;
 
-    public <T extends User> T createUser(T user) {
+    public <T extends User> T saveUser(T user) {
         return userRepository.save(user);
     }
 
@@ -87,6 +87,11 @@ public class UserService {
         userRepository.save(student);
 
         return gameSession;
+    }
+
+    public User getUserById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
     }
 
 }

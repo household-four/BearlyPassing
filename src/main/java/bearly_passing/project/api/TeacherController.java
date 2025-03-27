@@ -33,7 +33,7 @@ public class TeacherController {
         Teacher teacher = new Teacher();
         teacher.setName(name);
 
-        return userService.createUser(teacher);
+        return userService.saveUser(teacher);
     }
 
     @PostMapping("/{teacherId}/add-student/{studentId}")

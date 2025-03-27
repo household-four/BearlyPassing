@@ -21,7 +21,7 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Changed this name to match GameDTO
+    // Changed type to gameType  for clarity and to match GameDTO
     private String gameType;
 
     @ManyToOne

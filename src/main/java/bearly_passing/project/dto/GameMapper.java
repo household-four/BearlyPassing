@@ -5,13 +5,20 @@ import bearly_passing.project.domain.Game;
 public class GameMapper {
 
     public static GameDTO toDTO(Game game) {
-        return new GameDTO(
-            game.getId(),
-            game.getGameType(),
-            game.getStudySet() != null ? game.getStudySet().getId() : null,
-            game.getUser() != null ? game.getUser().getId() : null
-        );
+        GameDTO dto = new GameDTO();
+        dto.setId(game.getId());
+        dto.setGameType(game.getGameType());
+
+        if (game.getStudySet() != null) {
+            dto.setStudySetId(game.getStudySet().getId());
+        }
+
+        if (game.getCreator() != null) {
+            dto.setUserId(game.getCreator().getId());
+        }
+
+        return dto;
     }
 
-    // Optionally add toEntity(...) later
+    // Optional: You could add a fromDTO() if needed later.
 }

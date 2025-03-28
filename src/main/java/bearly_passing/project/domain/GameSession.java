@@ -9,20 +9,38 @@ import lombok.Data;
 @Data
 @Entity
 public class GameSession {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "game_id") // The original game
+    @JoinColumn(name = "game_id")
     private Game game;
 
     @ManyToOne
     @JoinColumn(name = "student_id")
     private Student student;
 
-    private int score;
+    private int score = 0;
 
     private boolean completed;
 
+    private int currentQuestionIndex = 0;
+
+    public int getCurrentQuestionIndex() {
+        return currentQuestionIndex;
+    }
+
+    public void setCurrentQuestionIndex(int currentQuestionIndex) {
+        this.currentQuestionIndex = currentQuestionIndex;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
 }

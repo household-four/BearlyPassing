@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List; 
+
 @Data
 @Entity
 public class Question {
@@ -24,8 +26,15 @@ public class Question {
     @JoinColumn(name = "study_set")
     private StudySet studySet;
 
+    @ElementCollection
+    private List<String> options;
+
     public enum Difficulty {
         EASY, MEDIUM, HARD
+    }
+
+    public Long getId() {
+        return this.id;
     }
 
     public String getBody() {
@@ -60,8 +69,7 @@ public class Question {
         this.studySet = studySet;
     }
 
-    public Long getId() {
-        return this.id;
+    public List<String> getOptions() {
+        return options;
     }
-    
 }

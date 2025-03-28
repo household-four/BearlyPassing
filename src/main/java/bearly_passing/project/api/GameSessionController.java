@@ -1,11 +1,13 @@
 package bearly_passing.project.api;
 
 import bearly_passing.project.domain.GameSession;
+import bearly_passing.project.dto.GameQuestionDTO;
 import bearly_passing.project.dto.GameSessionDTO;
 import bearly_passing.project.dto.GameSessionMapper;
 import bearly_passing.project.services.GameService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +27,13 @@ public class GameSessionController {
                 .map(GameSessionMapper::toDTO)
                 .collect(Collectors.toList());
     }
+
+    @GetMapping("/question/{gameSessionId}")
+    public ResponseEntity<GameQuestionDTO> getCurrentQuestion(@PathVariable Long gameSessionId) {
+        GameQuestionDTO dto = gameService.getCurrentQuestionDTO(gameSessionId);
+        return ResponseEntity.ok(dto);
+    }
+
 
     // May expand this later to include updating score, marking complete, etc. as needed
 }

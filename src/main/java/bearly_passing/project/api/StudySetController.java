@@ -42,6 +42,12 @@ public class StudySetController {
         return StudySetMapper.toDTO(studySet);
     }
 
+    @PostMapping("/createFromDTO")
+    public StudySetDTO createStudySetFromDTO(@RequestBody StudySetDTO dto) {
+        StudySet saved = studySetService.createStudySet(dto);
+        return StudySetMapper.toDTO(saved);
+    }
+
     @GetMapping("/sets")
     public List<StudySetDTO> getAllStudySets() {
         return studySetService.getAllStudySets()

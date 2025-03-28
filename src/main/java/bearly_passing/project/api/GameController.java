@@ -6,13 +6,20 @@ import bearly_passing.project.dto.GameMapper;
 import bearly_passing.project.services.GameService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/game")
+@CrossOrigin
 public class GameController {
 
     @Autowired
@@ -20,10 +27,9 @@ public class GameController {
 
     @GetMapping("/all")
     public List<GameDTO> getAllGames() {
-        List<Game> games = gameService.getAllGames();
-        return games.stream()
+        return gameService.getAllGames().stream()
                 .map(GameMapper::toDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @GetMapping("/{id}")
@@ -33,8 +39,17 @@ public class GameController {
     }
 
     @PostMapping("/create")
-    public GameDTO createGame(@RequestBody Game game) {
-        Game savedGame = gameService.saveGame(game);
-        return GameMapper.toDTO(savedGame);
+    public ResponseEntity<GameDTO> createGame(@RequestBody GameDTO gameDTO) {
+        Game saved = gameService.createNewGame(
+            gameDTO.getStudySetId(),
+            gameDTO.getUserId(),
+            gameDTO.getGameType()
+        );
+        return ResponseEntity.ok(GameMapper.toDTO(saved));
+    }
+
+    @PostMapping("/test")
+    public String testPost() {
+        return "Test OK";
     }
 }

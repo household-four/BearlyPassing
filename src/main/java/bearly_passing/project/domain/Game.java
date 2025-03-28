@@ -4,14 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -21,7 +14,6 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Changed type to gameType  for clarity and to match GameDTO
     private String gameType;
 
     @ManyToOne
@@ -38,11 +30,19 @@ public class Game {
     @JsonIgnore
     private List<GameSession> sessions;
 
+    public Long getStudySetId() {
+        return studySet != null ? studySet.getId() : null;
+    }
+
+    public Long getUserId() {
+        return creator != null ? creator.getId() : null;
+    }
+
     public void setStudySet(StudySet studySet) {
         this.studySet = studySet;
     }
 
-    public User getUser() {
+    public User getCreator() {
         return creator;
     }
 }

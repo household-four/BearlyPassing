@@ -23,6 +23,7 @@ import bearly_passing.project.data.UserRepository;
 import bearly_passing.project.domain.Question;
 import bearly_passing.project.domain.StudySet;
 import bearly_passing.project.domain.User;
+import bearly_passing.project.dto.StudySetDTO;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -139,4 +140,12 @@ public class StudySetService {
     public List<StudySet> getAllStudySets() {
         return studySetRepository.findAll();
     }
+
+    public StudySet createStudySet(StudySetDTO dto) {
+        StudySet studySet = new StudySet();
+        studySet.setTitle(dto.getTitle());
+        studySet.setDescription(dto.getDescription());
+        return studySetRepository.save(studySet);
+    }
+
 }

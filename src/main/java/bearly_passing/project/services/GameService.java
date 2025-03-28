@@ -1,6 +1,5 @@
 package bearly_passing.project.services;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +17,7 @@ import bearly_passing.project.domain.Student;
 import bearly_passing.project.domain.StudySet;
 import bearly_passing.project.domain.Teacher;
 import bearly_passing.project.domain.User;
+import bearly_passing.project.dto.GameQuestionDTO;
 import jakarta.transaction.Transactional;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -101,5 +101,27 @@ public class GameService {
     public Game saveGame(Game game) {
         return gameRepository.save(game);
     }
+
+    public GameQuestionDTO getCurrentQuestionDTO(Long gameSessionId) {
+        GameSession session = gameSessionRepository.findById(gameSessionId)
+            .orElseThrow(() -> new RuntimeException("Game session not found"));
+
+        List<Question> questions = session.getGame().getStudySet().getQuestions();
+        int index = session.getCurrentQuestionIndex();
+
+        if (index < 0 || index >= questions.size()) {
+            throw new RuntimeException("Invalid question index");
+     }
+
+        Question currentQuestion = questions.get(index);
+
+        GameQuestionDTO dto = new GameQuestionDTO();
+        dto.setQuestionId(currentQuestion.getId());
+        dto.setQuestionBody(currentQuestion.getBody());
+        dto.setAnswerOptions(currentQuestion.getOptions()); // assuming this returns a List<String>
+
+        return dto;
+    }
+
     
 }

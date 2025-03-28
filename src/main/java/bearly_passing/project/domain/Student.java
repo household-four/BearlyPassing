@@ -8,13 +8,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @Entity
 @EqualsAndHashCode(callSuper = true)
 public class Student extends User {
+
+    public Student() {
+        super();
+        setRole(UserRole.STUDENT); // Automatically assign role
+    }
 
     @ManyToMany(mappedBy = "students")
     @JsonIgnore

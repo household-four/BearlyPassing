@@ -15,6 +15,11 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class Teacher extends User {
 
+    public Teacher() {
+        super();
+        setRole(UserRole.TEACHER); // Automatically assign role
+    }
+
     @ManyToMany
     @JsonIgnore
     private List<Student> students;

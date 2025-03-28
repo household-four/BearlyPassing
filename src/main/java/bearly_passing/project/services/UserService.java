@@ -15,6 +15,8 @@ import bearly_passing.project.domain.Student;
 import bearly_passing.project.domain.StudySet;
 import bearly_passing.project.domain.Teacher;
 import bearly_passing.project.domain.User;
+import bearly_passing.project.domain.UserRole;
+
 import jakarta.transaction.Transactional;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -51,7 +53,7 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("Student not found"));
 
         if (!teacher.getStudents().contains(student)) {
-            teacher.getStudents().add(student); // Do we need both of these `add` methods?
+            teacher.getStudents().add(student);
             student.getTeachers().add(teacher);
             userRepository.save(teacher);
         }
@@ -74,7 +76,6 @@ public class UserService {
             throw new RuntimeException("Student is not assigned to this teacher");
         }
 
-        // Creates a new GameSession using the Game the teacher created
         GameSession gameSession = new GameSession();
         gameSession.setGame(game);
         gameSession.setStudent(student);
@@ -95,12 +96,12 @@ public class UserService {
     }
 
     public Student createStudent(Student student) {
+        student.setRole(UserRole.STUDENT);
         return userRepository.save(student);
     }
-    
+
     public Teacher createTeacher(Teacher teacher) {
+        teacher.setRole(UserRole.TEACHER);
         return userRepository.save(teacher);
     }
-    
-
 }

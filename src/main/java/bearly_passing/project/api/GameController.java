@@ -1,8 +1,11 @@
 package bearly_passing.project.api;
 
 import bearly_passing.project.domain.Game;
+import bearly_passing.project.domain.GameSession;
 import bearly_passing.project.dto.GameDTO;
 import bearly_passing.project.dto.GameMapper;
+import bearly_passing.project.dto.GameSessionDTO;
+import bearly_passing.project.dto.GameSessionMapper;
 import bearly_passing.project.services.GameService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,4 +55,14 @@ public class GameController {
     public String testPost() {
         return "Test OK";
     }
+
+    @PostMapping("/game/{gameId}/student/{studentId}/session")
+    public ResponseEntity<GameSessionDTO> createGameSession(
+            @PathVariable Long gameId,
+            @PathVariable Long studentId) {
+    
+        GameSession session = gameService.createSession(gameId, studentId);
+        return ResponseEntity.ok(GameSessionMapper.toDTO(session));
+    }
+
 }

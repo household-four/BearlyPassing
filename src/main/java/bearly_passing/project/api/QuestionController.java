@@ -6,13 +6,14 @@ import bearly_passing.project.dto.QuestionMapper;
 import bearly_passing.project.services.QuestionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/question")
+@CrossOrigin
 public class QuestionController {
 
     @Autowired
@@ -20,22 +21,19 @@ public class QuestionController {
 
     @GetMapping("/all")
     public List<QuestionDTO> getAllQuestions() {
-        List<Question> questions = questionService.getAllQuestions();
-        return questions.stream()
+        return questionService.getAllQuestions().stream()
                 .map(QuestionMapper::toDTO)
-                .collect(Collectors.toList());
-    }
-
-    @PostMapping("/add")
-    public QuestionDTO addQuestion(@RequestBody Question question) {
-        Question saved = questionService.saveQuestion(question);
-        return QuestionMapper.toDTO(saved);
+                .toList();
     }
 
     @GetMapping("/{id}")
     public QuestionDTO getQuestionById(@PathVariable Long id) {
-        Question question = questionService.getQuestionById(id);
-        return QuestionMapper.toDTO(question);
+        return QuestionMapper.toDTO(questionService.getQuestionById(id));
     }
 
+    @PostMapping("/create")
+    public ResponseEntity<QuestionDTO> createQuestion(@RequestBody Question question) {
+        Question saved = questionService.createQuestionWithStudySetValidation(question);
+        return ResponseEntity.ok(QuestionMapper.toDTO(saved));
+    }
 }

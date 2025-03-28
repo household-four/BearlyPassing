@@ -1,15 +1,14 @@
 package bearly_passing.project.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.List; 
+import java.util.List;
 
 @Data
 @Entity
 public class Question {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -21,9 +20,8 @@ public class Question {
     @Enumerated(EnumType.STRING)
     private Difficulty difficulty;
 
-    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "study_set")
+    @JoinColumn(name = "study_set_id")
     private StudySet studySet;
 
     @ElementCollection
@@ -53,6 +51,14 @@ public class Question {
         this.correctAnswer = correctAnswer;
     }
 
+    public String getGivenAnswer() {
+        return givenAnswer;
+    }
+
+    public void setGivenAnswer(String givenAnswer) {
+        this.givenAnswer = givenAnswer;
+    }
+
     public Difficulty getDifficulty() {
         return difficulty;
     }
@@ -71,5 +77,9 @@ public class Question {
 
     public List<String> getOptions() {
         return options;
+    }
+
+    public void setOptions(List<String> options) {
+        this.options = options;
     }
 }

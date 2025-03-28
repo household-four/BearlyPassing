@@ -1,6 +1,7 @@
 package bearly_passing.project.api;
 
 import bearly_passing.project.domain.GameSession;
+import bearly_passing.project.dto.GameAnswerDTO;
 import bearly_passing.project.dto.GameQuestionDTO;
 import bearly_passing.project.dto.GameSessionDTO;
 import bearly_passing.project.dto.GameSessionMapper;
@@ -34,6 +35,15 @@ public class GameSessionController {
         return ResponseEntity.ok(dto);
     }
 
+    @PostMapping("/answer")
+    public ResponseEntity<String> submitAnswer(@RequestBody GameAnswerDTO answerDTO) {
+        String result = gameService.submitAnswer(
+            answerDTO.getGameSessionId(),
+            answerDTO.getQuestionId(),
+            answerDTO.getSubmittedAnswer()
+        );
+        return ResponseEntity.ok(result);
+    }
 
     // May expand this later to include updating score, marking complete, etc. as needed
 }

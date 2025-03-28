@@ -123,5 +123,52 @@ public class GameService {
         return dto;
     }
 
+    @Transactional
+    public String submitAnswer(Long gameSessionId, Long questionId, String submittedAnswer) {
+        GameSession session = gameSessionRepository.findById(gameSessionId)
+            .orElseThrow(() -> new RuntimeException("Game session not found"));
+
+        List<Question> questions = session.getGame().getStudySet().getQuestions();
+        int index = session.getCurrentQuestionIndex();
+
+        if (index < 0 || index >= questions.size()) {
+            throw new RuntimeException("Invalid question index");
+        }
+
+        Question currentQuestion = questions.get(index);
+        boolean isCorrect = currentQuestion.getAnswer().equalsIgnoreCase(submittedAnswer);
+
+        if (isCorrect) {
+            session.setScore(session.getScore() + 1);
+        }
+
+        session.setCurrentQuestionIndex(index + 1);
+
+        // If it was the last question, mark complete
+        if (session.getCurrentQuestionIndex() >= questions.size()) {
+            session.setCompleted(true);
+        }
+
+        gameSessionRepository.save(session);
+
+        return isCorrect ? "Correct!" : "Incorrect. Try again.";
+    }
+
+    public GameSession createSession(Long gameId, Long studentId) {
+        Game game = gameRepository.findById(gameId)
+                .orElseThrow(() -> new RuntimeException("Game not found"));
+    
+        Student student = studentRepository.findById(studentId)
+                .orElseThrow(() -> new RuntimeException("Student not found"));
+    
+        GameSession session = new GameSession();
+        session.setGame(game);
+        session.setStudent(student);
+        session.setScore(0);
+        session.setCompleted(false);
+    
+        return gameSessionRepository.save(session);
+    }
+    
     
 }

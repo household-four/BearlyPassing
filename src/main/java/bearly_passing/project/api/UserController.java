@@ -8,6 +8,7 @@ import bearly_passing.project.dto.UserMapper;
 import bearly_passing.project.services.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,35 +16,48 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin // Optional for browser/Postman testing
 public class UserController {
 
     @Autowired
     private UserService userService;
 
+    // READ: Get all users
     @GetMapping("/all")
     public List<UserDTO> getAllUsers() {
-        List<User> users = userService.getAllUsers();
-        return users.stream()
+        return userService.getAllUsers().stream()
                 .map(UserMapper::toDTO)
                 .collect(Collectors.toList());
     }
 
+    // READ: Get a user by ID
     @GetMapping("/{id}")
     public UserDTO getUserById(@PathVariable Long id) {
-        User user = userService.getUserById(id);
-        return UserMapper.toDTO(user);
+        return UserMapper.toDTO(userService.getUserById(id));
     }
 
+    // CREATE: New student
     @PostMapping("/student/create")
     public UserDTO createStudent(@RequestBody Student student) {
-        Student saved = userService.createStudent(student);
-        return UserMapper.toDTO(saved);
+        return UserMapper.toDTO(userService.createStudent(student));
     }
 
+    // CREATE: New teacher
     @PostMapping("/teacher/create")
     public UserDTO createTeacher(@RequestBody Teacher teacher) {
-     Teacher saved = userService.createTeacher(teacher);
-        return UserMapper.toDTO(saved);
+        return UserMapper.toDTO(userService.createTeacher(teacher));
     }
 
+    // UPDATE: Existing user
+    @PutMapping("/update/{id}")
+    public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody User userUpdate) {
+        return ResponseEntity.ok(UserMapper.toDTO(userService.updateUser(id, userUpdate)));
+    }
+
+    // DELETE: User by ID
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
+        return ResponseEntity.ok("User deleted successfully.");
+    }
 }

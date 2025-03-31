@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin // Optional for browser/Postman testing
+@CrossOrigin 
 public class UserController {
 
     @Autowired

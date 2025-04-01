@@ -14,4 +14,4 @@ To run, use either mvnw, mvnw.cmd, or manually call "mvn spring-boot:run".
 
 ## Postman Collection
 
-To test the use case endpoints, import "BearlyPassing.postman_collection.json" into postman and run all tests.
+To test the use case endpoints, import "Postman Collection CSI 5324 - Project Iteration 2.json" into postman and run all tests.

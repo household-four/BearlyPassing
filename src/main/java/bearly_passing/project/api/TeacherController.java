@@ -18,7 +18,7 @@ import bearly_passing.project.services.GameService;
 import bearly_passing.project.services.UserService;
 
 @RestController
-@RequestMapping("/teacher")
+@RequestMapping("api/teacher")
 
 public class TeacherController {
 

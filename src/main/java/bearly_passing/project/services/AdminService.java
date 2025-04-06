@@ -37,6 +37,17 @@ public class AdminService {
 
     @Transactional
     public void populateDummyData() {
+        gameRepository.deleteAll();
+        gameSessionRepository.deleteAll();
+        questionRepository.deleteAll();
+        userRepository.deleteAll();
+        studySetRepository.deleteAll();
+
+        if (userRepository.count() > 0) {
+            System.out.println("Users already exist. Skipping population.");
+            return;
+        }
+
         Teacher teacher1 = new Teacher();
         teacher1.setName("Mr. Smith");
 
@@ -96,7 +107,7 @@ public class AdminService {
     @Transactional
     public String studentGrade(Long studentID) {
         Student student = (Student) userRepository.findById(studentID)
-            .orElseThrow(() -> new RuntimeException("Student not found"));
+                .orElseThrow(() -> new RuntimeException("Student not found"));
 
         return student.getName() + ": " + student.getGrade();
     }
@@ -104,7 +115,7 @@ public class AdminService {
     @Transactional
     public String teacherClass(Long teacherID) {
         Teacher teacher = (Teacher) userRepository.findById(teacherID)
-            .orElseThrow(() -> new RuntimeException("Teacher not found"));
+                .orElseThrow(() -> new RuntimeException("Teacher not found"));
 
         String out = "Teacher: " + teacher.getName() + "\n\nStudents:\n";
 

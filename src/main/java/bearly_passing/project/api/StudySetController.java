@@ -13,7 +13,7 @@ import bearly_passing.project.dto.StudySetMapper;
 import bearly_passing.project.services.StudySetService;
 
 @RestController
-@RequestMapping("/set")
+@RequestMapping("api/set")
 public class StudySetController {
 
     @Autowired

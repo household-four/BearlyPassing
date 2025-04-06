@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/game")
+@RequestMapping("api/game")
 @CrossOrigin
 public class GameController {
 
@@ -44,10 +44,9 @@ public class GameController {
     @PostMapping("/create")
     public ResponseEntity<GameDTO> createGame(@RequestBody GameDTO gameDTO) {
         Game saved = gameService.createNewGame(
-            gameDTO.getStudySetId(),
-            gameDTO.getUserId(),
-            gameDTO.getGameType()
-        );
+                gameDTO.getStudySetId(),
+                gameDTO.getUserId(),
+                gameDTO.getGameType());
         return ResponseEntity.ok(GameMapper.toDTO(saved));
     }
 
@@ -60,7 +59,7 @@ public class GameController {
     public ResponseEntity<GameSessionDTO> createGameSession(
             @PathVariable Long gameId,
             @PathVariable Long studentId) {
-    
+
         GameSession session = gameService.createSession(gameId, studentId);
         return ResponseEntity.ok(GameSessionMapper.toDTO(session));
     }

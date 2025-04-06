@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/gamesession")
+@RequestMapping("api/gamesession")
 public class GameSessionController {
 
     @Autowired
@@ -38,12 +38,12 @@ public class GameSessionController {
     @PostMapping("/answer")
     public ResponseEntity<String> submitAnswer(@RequestBody GameAnswerDTO answerDTO) {
         String result = gameService.submitAnswer(
-            answerDTO.getGameSessionId(),
-            answerDTO.getQuestionId(),
-            answerDTO.getSubmittedAnswer()
-        );
+                answerDTO.getGameSessionId(),
+                answerDTO.getQuestionId(),
+                answerDTO.getSubmittedAnswer());
         return ResponseEntity.ok(result);
     }
 
-    // May expand this later to include updating score, marking complete, etc. as needed
+    // May expand this later to include updating score, marking complete, etc. as
+    // needed
 }

@@ -15,8 +15,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/user")
-@CrossOrigin 
+@RequestMapping("api/user")
+@CrossOrigin
 public class UserController {
 
     @Autowired

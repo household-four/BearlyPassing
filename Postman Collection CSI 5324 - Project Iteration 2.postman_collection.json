@@ -24,7 +24,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/user/student/create",
+					"raw": "http://localhost:8080/api/user/student/create",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -57,7 +57,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/user/teacher/create",
+					"raw": "http://localhost:8080/api/user/teacher/create",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -90,7 +90,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/set/createFromDTO",
+					"raw": "http://localhost:8080/api/set/createFromDTO",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -122,7 +122,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/game/create",
+					"raw": "http://localhost:8080/api/game/create",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -154,7 +154,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/question/create",
+					"raw": "http://localhost:8080/api/question/create",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -177,7 +177,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/game/game/1/student/1/session",
+					"raw": "http://localhost:8080/api/game/game/1/student/1/session",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -213,7 +213,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/gamesession/answer",
+					"raw": "http://localhost:8080/api/gamesession/answer",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -236,7 +236,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/user/all",
+					"raw": "http://localhost:8080/api/user/all",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -268,7 +268,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/user/update/1",
+					"raw": "http://localhost:8080/api/user/update/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -292,7 +292,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/user/2",
+					"raw": "http://localhost:8080/api/user/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -315,7 +315,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/user/delete/1",
+					"raw": "http://localhost:8080/api/user/delete/1",
 					"protocol": "http",
 					"host": [
 						"localhost"

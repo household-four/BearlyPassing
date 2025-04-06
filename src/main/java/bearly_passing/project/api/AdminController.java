@@ -15,7 +15,7 @@ import bearly_passing.project.services.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("api/admin")
 public class AdminController {
 
     @Autowired

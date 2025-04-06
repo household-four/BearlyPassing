@@ -21,7 +21,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 
 @RestController
-@RequestMapping("/student")
+@RequestMapping("api/student")
 public class StudentController {
 
     @Autowired
@@ -58,6 +58,5 @@ public class StudentController {
     // GET /student/{id}/quiz-feedback/{quiz-id}
     public void getQuizFeedback(Long studentId, Long quizId) {
     }
-
 
 }

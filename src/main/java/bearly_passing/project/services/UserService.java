@@ -115,4 +115,19 @@ public class UserService {
 
         return gameSession;
     }
+
+    @Transactional
+    public List<Student> getStudentsByTeacherId(Long teacherId) {
+        Teacher teacher = (Teacher) userRepository.findById(teacherId)
+                .orElseThrow(() -> new RuntimeException("Teacher not found"));
+        return teacher.getStudents();
+    }
+
+    @Transactional
+    public List<StudySet> getStudySetsById(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        return user.getStudySets();
+    }
 }

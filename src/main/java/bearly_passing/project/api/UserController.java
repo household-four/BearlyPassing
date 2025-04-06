@@ -1,8 +1,11 @@
 package bearly_passing.project.api;
 
 import bearly_passing.project.domain.Student;
+import bearly_passing.project.domain.StudySet;
 import bearly_passing.project.domain.Teacher;
 import bearly_passing.project.domain.User;
+import bearly_passing.project.dto.StudySetDTO;
+import bearly_passing.project.dto.StudySetMapper;
 import bearly_passing.project.dto.UserDTO;
 import bearly_passing.project.dto.UserMapper;
 import bearly_passing.project.services.UserService;
@@ -59,5 +62,10 @@ public class UserController {
     public ResponseEntity<String> deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
         return ResponseEntity.ok("User deleted successfully.");
+    }
+
+    @GetMapping("/my-study-sets/{id}")
+    public List<StudySetDTO> getStudySetsById(@PathVariable Long id) {
+        return StudySetMapper.toDTOList(userService.getStudySetsById(id));
     }
 }

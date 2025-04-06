@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import bearly_passing.project.domain.StudySet;
 import bearly_passing.project.dto.StudySetDTO;
 import bearly_passing.project.dto.StudySetMapper;
+import bearly_passing.project.dto.UserDTO;
+import bearly_passing.project.dto.UserMapper;
 import bearly_passing.project.services.StudySetService;
 
 @RestController
@@ -18,6 +20,11 @@ public class StudySetController {
 
     @Autowired
     private StudySetService studySetService;
+
+    @GetMapping("/{id}")
+    public StudySetDTO getSetById(@PathVariable Long id) {
+        return StudySetMapper.toDTO(studySetService.getSetById(id));
+    }
 
     @PostMapping("/export")
     public void exportStudySet(@RequestParam Long studySetId) {

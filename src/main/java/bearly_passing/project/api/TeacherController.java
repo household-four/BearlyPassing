@@ -1,9 +1,11 @@
 package bearly_passing.project.api;
 
 import java.nio.file.Path;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import bearly_passing.project.domain.Game;
 import bearly_passing.project.domain.GameSession;
 import bearly_passing.project.domain.Teacher;
+import bearly_passing.project.dto.UserDTO;
+import bearly_passing.project.dto.UserMapper;
 import bearly_passing.project.services.GameService;
 import bearly_passing.project.services.UserService;
 
@@ -34,6 +38,11 @@ public class TeacherController {
         teacher.setName(name);
 
         return userService.saveUser(teacher);
+    }
+
+    @GetMapping("/my-students/{id}")
+    public List<UserDTO> getUserById(@PathVariable Long id) {
+        return UserMapper.toDTOList(userService.getStudentsByTeacherId(id));
     }
 
     @PostMapping("/{teacherId}/add-student/{studentId}")

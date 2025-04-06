@@ -39,6 +39,14 @@ public class StudySetService {
     private QuestionRepository questionRepository;
 
     @Transactional
+    public StudySet getSetById(Long studySetId) {
+        StudySet studySet = studySetRepository.findById(studySetId)
+                .orElseThrow(() -> new RuntimeException("StudySet not found"));
+
+        return studySet;
+    }
+
+    @Transactional
     public void saveStudySet(Long studySetId) {
         StudySet studySet = studySetRepository.findById(studySetId)
                 .orElseThrow(() -> new RuntimeException("StudySet not found"));
@@ -60,7 +68,7 @@ public class StudySetService {
         if (!Files.exists(path)) {
             throw new RuntimeException("File not found: " + path);
         }
-        
+
         StudySet new_set;
         try (InputStream input = Files.newInputStream(path)) {
             new_set = new ObjectMapper().readValue(input, StudySet.class);
@@ -84,30 +92,30 @@ public class StudySetService {
             studySet.addQuestion(question);
             questionRepository.save(question);
         }
-        
+
         return studySetRepository.save(studySet);
     }
 
     private ArrayList<Question> parseForQuestions(Document document) {
-        
+
         ArrayList<Question> questions = new ArrayList<>();
 
         for (Element item : document.select("item")) {
 
             Question question = new Question();
-            
+
             question.setBody(item.selectFirst("presentation material mattext").text());
-            
+
             String answerId = item.selectFirst("resprocessing respcondition conditionvar varequal").text();
             for (Element response : item.select("response_label")) {
                 if (response.attr("ident").equals(answerId)) {
                     question.setAnswer(response.selectFirst("material mattext").text());
                 }
             }
-        
+
             questions.add(question);
         }
-        
+
         return questions;
     }
 
@@ -115,14 +123,14 @@ public class StudySetService {
     public StudySet createNewStudySet(String name, Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("Student not found"));
-    
+
         StudySet studySet = new StudySet();
         studySet.setTitle(name);
         studySet.setCreator(user);
-    
+
         return studySetRepository.save(studySet);
     }
-    
+
     @Transactional
     public StudySet addQuestionToStudySet(Long studySetId, Question question) {
         StudySet studySet = studySetRepository.findById(studySetId)
@@ -135,7 +143,6 @@ public class StudySetService {
 
         return studySetRepository.save(studySet);
     }
-
 
     public List<StudySet> getAllStudySets() {
         return studySetRepository.findAll();

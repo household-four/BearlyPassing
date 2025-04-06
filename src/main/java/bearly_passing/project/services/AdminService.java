@@ -85,19 +85,32 @@ public class AdminService {
         userRepository.saveAll(Arrays.asList(teacher1, teacher2, teacher3));
 
         Question question = new Question();
-        question.setBody("What color is the sky?");
-        question.setCorrectAnswer("blue");
+        question.setBody("What is the star at the center of our universe?");
+        question.setCorrectAnswer("sun");
+        question.setDifficulty(Question.Difficulty.EASY);
+
+        Question question2 = new Question();
+        question2.setBody("What part of a plant allows it to make its own food?");
+        question2.setCorrectAnswer("leaf");
+        question2.setDifficulty(Question.Difficulty.MEDIUM);
 
         StudySet studySet = new StudySet();
-        studySet.getQuestions().add(question);
+        studySet.setTitle("1st Grade Science");
+        studySet.setDescription("Basic Science Questions for 1st Graders");
+        question.setStudySet(studySet);
+        question2.setStudySet(studySet);
+        // studySet.getQuestions().add(question);
+        // studySet.getQuestions().add(question2);
 
         Game game = new Game();
         game.setStudySet(studySet);
 
-        question.setStudySet(studySet);
+        // question.setStudySet(studySet);
         studySet.getGames().add(game);
 
+        studySet.setCreator(teacher1);
         questionRepository.save(question);
+        questionRepository.save(question2);
         studySetRepository.save(studySet);
         gameRepository.save(game);
 

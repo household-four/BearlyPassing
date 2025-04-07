@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import bearly_passing.project.data.QuestionRepository;
 import bearly_passing.project.data.StudySetRepository;
 import bearly_passing.project.data.UserRepository;
+import bearly_passing.project.domain.Game;
 import bearly_passing.project.domain.Question;
 import bearly_passing.project.domain.StudySet;
 import bearly_passing.project.domain.User;
@@ -120,12 +121,13 @@ public class StudySetService {
     }
 
     @Transactional
-    public StudySet createNewStudySet(String name, Long userId) {
+    public StudySet createNewStudySet(String name, Long userId, String description) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("Student not found"));
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
         StudySet studySet = new StudySet();
         studySet.setTitle(name);
+        studySet.setDescription(description);
         studySet.setCreator(user);
 
         return studySetRepository.save(studySet);
@@ -144,15 +146,25 @@ public class StudySetService {
         return studySetRepository.save(studySet);
     }
 
+    @Transactional
     public List<StudySet> getAllStudySets() {
         return studySetRepository.findAll();
     }
 
+    @Transactional
     public StudySet createStudySet(StudySetDTO dto) {
         StudySet studySet = new StudySet();
         studySet.setTitle(dto.getTitle());
         studySet.setDescription(dto.getDescription());
         return studySetRepository.save(studySet);
+    }
+
+    @Transactional
+    public List<Game> getGamesByStudySetId(Long studySetId) {
+        StudySet studySet = studySetRepository.findById(studySetId)
+                .orElseThrow(() -> new RuntimeException("StudySet not found"));
+
+        return studySet.getGames();
     }
 
 }

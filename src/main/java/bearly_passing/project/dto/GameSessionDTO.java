@@ -4,31 +4,67 @@ public class GameSessionDTO {
     private Long id;
     private Long gameId;
     private Long studentId;
+    private String studentName;
     private int score;
     private boolean completed;
 
-    public GameSessionDTO() {}
+    public GameSessionDTO() {
+    }
 
-    public GameSessionDTO(Long id, Long gameId, Long studentId, int score, boolean completed) {
+    public GameSessionDTO(Long id, Long gameId, Long studentId, String studentName, int score, boolean completed) {
         this.id = id;
         this.gameId = gameId;
         this.studentId = studentId;
+        this.studentName = studentName;
         this.score = score;
         this.completed = completed;
     }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public Long getGameId() { return gameId; }
-    public void setGameId(Long gameId) { this.gameId = gameId; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public Long getStudentId() { return studentId; }
-    public void setStudentId(Long studentId) { this.studentId = studentId; }
+    public Long getGameId() {
+        return gameId;
+    }
 
-    public int getScore() { return score; }
-    public void setScore(int score) { this.score = score; }
+    public void setGameId(Long gameId) {
+        this.gameId = gameId;
+    }
 
-    public boolean isCompleted() { return completed; }
-    public void setCompleted(boolean completed) { this.completed = completed; }
+    public Long getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(Long studentId) {
+        this.studentId = studentId;
+    }
+
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
+    }
 }

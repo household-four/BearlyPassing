@@ -12,6 +12,7 @@ import bearly_passing.project.data.QuestionRepository;
 import bearly_passing.project.data.StudySetRepository;
 import bearly_passing.project.data.UserRepository;
 import bearly_passing.project.domain.Game;
+import bearly_passing.project.domain.GameSession;
 import bearly_passing.project.domain.Question;
 import bearly_passing.project.domain.Student;
 import bearly_passing.project.domain.StudySet;
@@ -104,6 +105,13 @@ public class AdminService {
 
         Game game = new Game();
         game.setStudySet(studySet);
+        game.setCreator(teacher1);
+        game.setGameType("Quiz");
+
+        GameSession gameSession1 = createDummyGameSession(student1, teacher1, game);
+        GameSession gameSession2 = createDummyGameSession(student2, teacher1, game);
+        gameSessionRepository.save(gameSession1);
+        gameSessionRepository.save(gameSession2);
 
         // question.setStudySet(studySet);
         studySet.getGames().add(game);
@@ -115,6 +123,16 @@ public class AdminService {
         gameRepository.save(game);
 
         System.out.println("Dummy data populated successfully!");
+    }
+
+    GameSession createDummyGameSession(Student student, Teacher creator, Game game) {
+        GameSession gameSession = new GameSession();
+        gameSession.setStudent(student);
+        gameSession.setGame(game);
+        gameSession.setCompleted(false);
+        gameSession.setScore(0);
+        gameSession.setCurrentQuestionIndex(0);
+        return gameSession;
     }
 
     @Transactional

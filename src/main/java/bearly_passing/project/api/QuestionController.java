@@ -1,8 +1,11 @@
 package bearly_passing.project.api;
 
 import bearly_passing.project.domain.Question;
+import bearly_passing.project.domain.User;
 import bearly_passing.project.dto.QuestionDTO;
 import bearly_passing.project.dto.QuestionMapper;
+import bearly_passing.project.dto.UserDTO;
+import bearly_passing.project.dto.UserMapper;
 import bearly_passing.project.services.QuestionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +38,10 @@ public class QuestionController {
     public ResponseEntity<QuestionDTO> createQuestion(@RequestBody Question question) {
         Question saved = questionService.createQuestionWithStudySetValidation(question);
         return ResponseEntity.ok(QuestionMapper.toDTO(saved));
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<QuestionDTO> updateQuestion(@PathVariable Long id, @RequestBody Question questionUpdate) {
+        return ResponseEntity.ok(QuestionMapper.toDTO(questionService.updateQuestion(id, questionUpdate)));
     }
 }

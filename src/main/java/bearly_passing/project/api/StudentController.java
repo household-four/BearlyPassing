@@ -43,6 +43,11 @@ public class StudentController {
         return gameService.getMyGameSessions(studentId);
     }
 
+    @GetMapping("/my-teachers")
+    public List<Teacher> getMyTeachers(@RequestParam Long studentId) {
+        return userService.getTeachersByStudentId(studentId);
+    }
+
     // GET /student/{id}/study-sets
     public void getAvailableStudySets() {
     }

@@ -7,7 +7,10 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import bearly_passing.project.domain.Game;
 import bearly_passing.project.domain.StudySet;
+import bearly_passing.project.dto.GameDTO;
+import bearly_passing.project.dto.GameMapper;
 import bearly_passing.project.dto.StudySetDTO;
 import bearly_passing.project.dto.StudySetMapper;
 import bearly_passing.project.dto.UserDTO;
@@ -44,8 +47,9 @@ public class StudySetController {
     }
 
     @PostMapping("/create")
-    public StudySetDTO createStudySet(@RequestParam String name, @RequestParam Long userId) {
-        StudySet studySet = studySetService.createNewStudySet(name, userId);
+    public StudySetDTO createStudySet(@RequestParam String name, @RequestParam Long userId,
+            @RequestParam String description) {
+        StudySet studySet = studySetService.createNewStudySet(name, userId, description);
         return StudySetMapper.toDTO(studySet);
     }
 
@@ -61,5 +65,10 @@ public class StudySetController {
                 .stream()
                 .map(StudySetMapper::toDTO)
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping("/games/{id}")
+    public List<GameDTO> getGamesByStudySetId(@PathVariable Long id) {
+        return GameMapper.toDTOList(studySetService.getGamesByStudySetId(id));
     }
 }

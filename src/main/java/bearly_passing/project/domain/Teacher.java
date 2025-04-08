@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

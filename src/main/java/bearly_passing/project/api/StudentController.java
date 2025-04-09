@@ -20,6 +20,9 @@ import bearly_passing.project.services.UserService;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @RequestMapping("api/student")
 public class StudentController {
@@ -32,6 +35,7 @@ public class StudentController {
 
     @PostMapping("/create")
     public Student createStudent(@RequestParam String name) {
+        log.info("Creating student {}", name);
         Student student = new Student();
         student.setName(name);
 
@@ -40,11 +44,13 @@ public class StudentController {
 
     @GetMapping("/my-games")
     public List<GameSession> getMyGameSessions(@RequestParam Long studentId) {
+        log.info("Getting sessions for student {}", studentId);
         return gameService.getMyGameSessions(studentId);
     }
 
     @GetMapping("/my-teachers")
     public List<Teacher> getMyTeachers(@RequestParam Long studentId) {
+        log.info("Getting teachers for student {}", studentId);
         return userService.getTeachersByStudentId(studentId);
     }
 

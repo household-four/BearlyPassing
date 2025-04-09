@@ -20,6 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @RequestMapping("api/game")
 @CrossOrigin
@@ -30,6 +33,7 @@ public class GameController {
 
     @GetMapping("/all")
     public List<GameDTO> getAllGames() {
+        log.info("Getting all games");
         return gameService.getAllGames().stream()
                 .map(GameMapper::toDTO)
                 .toList();
@@ -37,6 +41,7 @@ public class GameController {
 
     @GetMapping("/{id}")
     public GameDTO getGameById(@PathVariable Long id) {
+        log.info("Getting game {}", id);
         Game game = gameService.getGameById(id);
         return GameMapper.toDTO(game);
     }
@@ -47,6 +52,7 @@ public class GameController {
                 gameDTO.getStudySetId(),
                 gameDTO.getUserId(),
                 gameDTO.getGameType());
+        log.info("Creating game {}", saved.getId());
         return ResponseEntity.ok(GameMapper.toDTO(saved));
     }
 
@@ -61,6 +67,7 @@ public class GameController {
             @PathVariable Long studentId) {
 
         GameSession session = gameService.createSession(gameId, studentId);
+        log.info("Creating game session for game {} and student {}", gameId, studentId);
         return ResponseEntity.ok(GameSessionMapper.toDTO(session));
     }
 

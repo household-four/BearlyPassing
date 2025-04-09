@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @RequestMapping("api/gamesession")
 public class GameSessionController {
@@ -23,6 +26,7 @@ public class GameSessionController {
 
     @GetMapping("/student/{studentId}")
     public List<GameSessionDTO> getSessionsForStudent(@PathVariable Long studentId) {
+        log.info("Getting sessions for student {}", studentId);
         List<GameSession> sessions = gameService.getMyGameSessions(studentId);
         return sessions.stream()
                 .map(GameSessionMapper::toDTO)
@@ -31,6 +35,7 @@ public class GameSessionController {
 
     @GetMapping("/question/{gameSessionId}")
     public ResponseEntity<GameQuestionDTO> getCurrentQuestion(@PathVariable Long gameSessionId) {
+        log.info("Getting current question set for session {}", gameSessionId);
         GameQuestionDTO dto = gameService.getCurrentQuestionDTO(gameSessionId);
         return ResponseEntity.ok(dto);
     }
@@ -41,6 +46,7 @@ public class GameSessionController {
                 answerDTO.getGameSessionId(),
                 answerDTO.getQuestionId(),
                 answerDTO.getSubmittedAnswer());
+        log.info("Submitting answer");
         return ResponseEntity.ok(result);
     }
 

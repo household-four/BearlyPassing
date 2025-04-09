@@ -21,9 +21,11 @@ import bearly_passing.project.dto.UserMapper;
 import bearly_passing.project.services.GameService;
 import bearly_passing.project.services.UserService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @RequestMapping("api/teacher")
-
 public class TeacherController {
 
     @Autowired
@@ -34,6 +36,7 @@ public class TeacherController {
 
     @PostMapping("/create")
     public Teacher createTeacher(@RequestParam String name) {
+        log.info("Creating teacher {}", name);
         Teacher teacher = new Teacher();
         teacher.setName(name);
 
@@ -42,6 +45,7 @@ public class TeacherController {
 
     @GetMapping("/my-students/{id}")
     public List<UserDTO> getUserById(@PathVariable Long id) {
+        log.info("Getting students for teacher {}", id);
         return UserMapper.toDTOList(userService.getStudentsByTeacherId(id));
     }
 
@@ -49,6 +53,7 @@ public class TeacherController {
     public ResponseEntity<String> addStudentToTeacher(
             @PathVariable Long teacherId,
             @PathVariable Long studentId) {
+        log.info("Assigning student {} to teacher {}", studentId, teacherId);
         userService.addStudentToTeacher(teacherId, studentId);
         return ResponseEntity.ok("Student added successfully!");
     }
@@ -58,6 +63,7 @@ public class TeacherController {
             @PathVariable Long studySetId,
             @PathVariable Long creatorId,
             @PathVariable String type) {
+        log.info("Creating game");
         return gameService.createNewGame(studySetId, creatorId, type);
     }
 
@@ -66,6 +72,7 @@ public class TeacherController {
             @PathVariable Long teacherId,
             @PathVariable Long studentId,
             @PathVariable Long gameId) {
+        log.info("Assigning game {} to student {}", gameId, studentId);
         GameSession gameSession = userService.assignGameToStudent(teacherId, studentId, gameId);
         return ResponseEntity.ok(gameSession);
     }

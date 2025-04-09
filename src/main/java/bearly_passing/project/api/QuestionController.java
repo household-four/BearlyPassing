@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @RequestMapping("api/question")
 @CrossOrigin
@@ -24,6 +27,7 @@ public class QuestionController {
 
     @GetMapping("/all")
     public List<QuestionDTO> getAllQuestions() {
+        log.info("Getting all questions");
         return questionService.getAllQuestions().stream()
                 .map(QuestionMapper::toDTO)
                 .toList();
@@ -31,17 +35,20 @@ public class QuestionController {
 
     @GetMapping("/{id}")
     public QuestionDTO getQuestionById(@PathVariable Long id) {
+        log.info("Getting question {}", id);
         return QuestionMapper.toDTO(questionService.getQuestionById(id));
     }
 
     @PostMapping("/create")
     public ResponseEntity<QuestionDTO> createQuestion(@RequestBody Question question) {
+        log.info("Creating question");
         Question saved = questionService.createQuestionWithStudySetValidation(question);
         return ResponseEntity.ok(QuestionMapper.toDTO(saved));
     }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<QuestionDTO> updateQuestion(@PathVariable Long id, @RequestBody Question questionUpdate) {
+        log.info("Updating question {}", id);
         return ResponseEntity.ok(QuestionMapper.toDTO(questionService.updateQuestion(id, questionUpdate)));
     }
 }

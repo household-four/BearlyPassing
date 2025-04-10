@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import bearly_passing.project.domain.Game;
 import bearly_passing.project.domain.GameSession;
+import bearly_passing.project.domain.GameType;
 import bearly_passing.project.domain.Teacher;
 import bearly_passing.project.dto.UserDTO;
 import bearly_passing.project.dto.UserMapper;
@@ -62,7 +63,7 @@ public class TeacherController {
     public Game createTeacher(
             @PathVariable Long studySetId,
             @PathVariable Long creatorId,
-            @PathVariable String type) {
+            @PathVariable GameType type) {
         log.info("Creating game");
         return gameService.createNewGame(studySetId, creatorId, type);
     }

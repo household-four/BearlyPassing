@@ -1,8 +1,11 @@
 package bearly_passing.project.services;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import bearly_passing.project.data.GameRepository;
@@ -13,6 +16,7 @@ import bearly_passing.project.data.UserRepository;
 import bearly_passing.project.domain.Question;
 import bearly_passing.project.domain.Game;
 import bearly_passing.project.domain.GameSession;
+import bearly_passing.project.domain.GameType;
 import bearly_passing.project.domain.Student;
 import bearly_passing.project.domain.StudySet;
 import bearly_passing.project.domain.Teacher;
@@ -64,7 +68,7 @@ public class GameService {
     }
 
     @Transactional
-    public Game createNewGame(Long studySetId, Long creatorId, String type) {
+    public Game createNewGame(Long studySetId, Long creatorId, GameType type) {
         StudySet studySet = studySetRepository.findById(studySetId)
                 .orElseThrow(() -> new RuntimeException("Study set not found"));
 
@@ -96,6 +100,11 @@ public class GameService {
                 .orElseThrow(() -> new RuntimeException("Game not found with id: " + id));
     }
 
+    public GameSession getGameSessionById(Long id) {
+        return gameSessionRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Game not found with id: " + id));
+    }
+
     public Game saveGame(Game game) {
         return gameRepository.save(game);
     }
@@ -122,7 +131,8 @@ public class GameService {
     }
 
     @Transactional
-    public String submitAnswer(Long gameSessionId, Long questionId, String submittedAnswer) {
+    public Map<String, String> submitAnswer(Long gameSessionId, Long questionId,
+            String submittedAnswer) {
         GameSession session = gameSessionRepository.findById(gameSessionId)
                 .orElseThrow(() -> new RuntimeException("Game session not found"));
 
@@ -149,7 +159,9 @@ public class GameService {
 
         gameSessionRepository.save(session);
 
-        return isCorrect ? "Correct!" : "Incorrect. Try again.";
+        Map<String, String> response = new HashMap<>();
+        response.put("message", isCorrect ? "Correct!" : "Incorrect. Try again.");
+        return response;
     }
 
     public GameSession createSession(Long gameId, Long studentId) {

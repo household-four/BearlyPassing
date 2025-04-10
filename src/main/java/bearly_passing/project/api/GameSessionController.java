@@ -5,6 +5,8 @@ import bearly_passing.project.dto.GameAnswerDTO;
 import bearly_passing.project.dto.GameQuestionDTO;
 import bearly_passing.project.dto.GameSessionDTO;
 import bearly_passing.project.dto.GameSessionMapper;
+import bearly_passing.project.dto.StudySetDTO;
+import bearly_passing.project.dto.StudySetMapper;
 import bearly_passing.project.services.GameService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +26,12 @@ public class GameSessionController {
 
     @Autowired
     private GameService gameService;
+
+    @GetMapping("/{id}")
+    public GameSessionDTO getSessionById(@PathVariable Long id) {
+        log.info("Getting game session {}", id);
+        return GameSessionMapper.toDTO(gameService.getGameSessionById(id));
+    }
 
     @GetMapping("/student/{studentId}")
     public List<GameSessionDTO> getSessionsForStudent(@PathVariable Long studentId) {
@@ -41,8 +50,8 @@ public class GameSessionController {
     }
 
     @PostMapping("/answer")
-    public ResponseEntity<String> submitAnswer(@RequestBody GameAnswerDTO answerDTO) {
-        String result = gameService.submitAnswer(
+    public ResponseEntity<Map<String, String>> submitAnswer(@RequestBody GameAnswerDTO answerDTO) {
+        Map<String, String> result = gameService.submitAnswer(
                 answerDTO.getGameSessionId(),
                 answerDTO.getQuestionId(),
                 answerDTO.getSubmittedAnswer());

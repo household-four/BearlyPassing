@@ -2,9 +2,11 @@ package bearly_passing.project.dto;
 
 import java.util.List;
 
+import bearly_passing.project.domain.GameType;
+
 public class GameDTO {
     private Long id;
-    private String gameType;
+    private GameType gameType;
     private Long studySetId;
     private String studySetName;
     private Long userId;
@@ -13,7 +15,7 @@ public class GameDTO {
     public GameDTO() {
     }
 
-    public GameDTO(Long id, String gameType, String studySetName, Long studySetId, Long userId,
+    public GameDTO(Long id, GameType gameType, String studySetName, Long studySetId, Long userId,
             List<GameSessionDTO> gameSessions) {
         this.id = id;
         this.gameType = gameType;
@@ -31,11 +33,11 @@ public class GameDTO {
         this.id = id;
     }
 
-    public String getGameType() {
+    public GameType getGameType() {
         return gameType;
     }
 
-    public void setGameType(String gameType) {
+    public void setGameType(GameType gameType) {
         this.gameType = gameType;
     }
 

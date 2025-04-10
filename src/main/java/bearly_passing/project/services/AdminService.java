@@ -13,6 +13,7 @@ import bearly_passing.project.data.StudySetRepository;
 import bearly_passing.project.data.UserRepository;
 import bearly_passing.project.domain.Game;
 import bearly_passing.project.domain.GameSession;
+import bearly_passing.project.domain.GameType;
 import bearly_passing.project.domain.Question;
 import bearly_passing.project.domain.Student;
 import bearly_passing.project.domain.StudySet;
@@ -95,23 +96,44 @@ public class AdminService {
         question2.setCorrectAnswer("leaf");
         question2.setDifficulty(Question.Difficulty.MEDIUM);
 
+        Question question3 = new Question();
+        question3.setBody("What do humans need to breathe?");
+        question3.setCorrectAnswer("oxygen");
+        question3.setDifficulty(Question.Difficulty.EASY);
+
+        Question question4 = new Question();
+        question4.setBody("Which season is the coldest?");
+        question4.setCorrectAnswer("winter");
+        question4.setDifficulty(Question.Difficulty.EASY);
+
         StudySet studySet = new StudySet();
         studySet.setTitle("1st Grade Science");
         studySet.setDescription("Basic Science Questions for 1st Graders");
         question.setStudySet(studySet);
         question2.setStudySet(studySet);
+        question3.setStudySet(studySet);
+        question4.setStudySet(studySet);
         // studySet.getQuestions().add(question);
         // studySet.getQuestions().add(question2);
 
         Game game = new Game();
         game.setStudySet(studySet);
         game.setCreator(teacher1);
-        game.setGameType("Quiz");
+        game.setGameType(GameType.MATCHING);
+
+        Game game2 = new Game();
+        game2.setStudySet(studySet);
+        game2.setCreator(teacher1);
+        game2.setGameType(GameType.FLASHCARD);
 
         GameSession gameSession1 = createDummyGameSession(student1, teacher1, game);
         GameSession gameSession2 = createDummyGameSession(student2, teacher1, game);
+        GameSession gameSession3 = createDummyGameSession(student1, teacher1, game2);
+        GameSession gameSession4 = createDummyGameSession(student2, teacher1, game2);
         gameSessionRepository.save(gameSession1);
         gameSessionRepository.save(gameSession2);
+        gameSessionRepository.save(gameSession3);
+        gameSessionRepository.save(gameSession4);
 
         // question.setStudySet(studySet);
         studySet.getGames().add(game);
@@ -119,8 +141,11 @@ public class AdminService {
         studySet.setCreator(teacher1);
         questionRepository.save(question);
         questionRepository.save(question2);
+        questionRepository.save(question3);
+        questionRepository.save(question4);
         studySetRepository.save(studySet);
         gameRepository.save(game);
+        gameRepository.save(game2);
 
         System.out.println("Dummy data populated successfully!");
     }

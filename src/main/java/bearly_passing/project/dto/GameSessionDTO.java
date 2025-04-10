@@ -1,21 +1,36 @@
 package bearly_passing.project.dto;
 
+import bearly_passing.project.domain.GameType;
+import bearly_passing.project.domain.StudySet;
+
 public class GameSessionDTO {
     private Long id;
     private Long gameId;
+    private String gameType;
     private Long studentId;
     private String studentName;
+    private Long studySetId;
     private int score;
     private boolean completed;
 
     public GameSessionDTO() {
     }
 
-    public GameSessionDTO(Long id, Long gameId, Long studentId, String studentName, int score, boolean completed) {
+    public GameSessionDTO(
+            Long id,
+            Long gameId,
+            String gameType,
+            Long studentId,
+            String studentName,
+            Long studySetId,
+            int score,
+            boolean completed) {
         this.id = id;
         this.gameId = gameId;
+        this.gameType = gameType;
         this.studentId = studentId;
         this.studentName = studentName;
+        this.studySetId = studySetId;
         this.score = score;
         this.completed = completed;
     }
@@ -50,6 +65,22 @@ public class GameSessionDTO {
 
     public void setStudentName(String studentName) {
         this.studentName = studentName;
+    }
+
+    public Long getStudySetId() {
+        return studySetId;
+    }
+
+    public void setStudySetId(Long id) {
+        this.studySetId = id;
+    }
+
+    public String getGameType() {
+        return gameType;
+    }
+
+    public void setGameType(String type) {
+        this.gameType = type;
     }
 
     public int getScore() {

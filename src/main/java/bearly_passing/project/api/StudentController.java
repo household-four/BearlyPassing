@@ -14,6 +14,8 @@ import bearly_passing.project.domain.GameSession;
 import bearly_passing.project.domain.Student;
 import bearly_passing.project.domain.Teacher;
 import bearly_passing.project.domain.User;
+import bearly_passing.project.dto.GameSessionDTO;
+import bearly_passing.project.dto.GameSessionMapper;
 import bearly_passing.project.services.GameService;
 import bearly_passing.project.services.UserService;
 
@@ -46,9 +48,9 @@ public class StudentController {
     }
 
     @GetMapping("/my-games")
-    public List<GameSession> getMyGameSessions(@RequestParam Long studentId) {
+    public List<GameSessionDTO> getMyGameSessions(@RequestParam Long studentId) {
         log.info("Getting sessions for student {}", studentId);
-        return gameService.getMyGameSessions(studentId);
+        return GameSessionMapper.toDTOList(gameService.getMyGameSessions(studentId));
     }
 
     @GetMapping("/my-teachers")

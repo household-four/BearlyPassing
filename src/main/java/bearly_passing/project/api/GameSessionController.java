@@ -50,6 +50,15 @@ public class GameSessionController {
         return ResponseEntity.ok(result);
     }
 
+    @DeleteMapping("delete/{gameSessionId}")
+    public ResponseEntity<Void> deleteGameSession(
+            @PathVariable Long gameSessionId) {
+
+        log.info("Deleting game session for game {} and student {}", gameSessionId);
+        gameService.deleteSession(gameSessionId);
+        return ResponseEntity.noContent().build(); // 204 No Content
+    }
+
     // May expand this later to include updating score, marking complete, etc. as
     // needed
 }

@@ -25,7 +25,6 @@ import jakarta.persistence.PersistenceContext;
 @Service
 public class GameService {
 
-
     @Autowired
     private StudentRepository studentRepository;
 
@@ -82,8 +81,7 @@ public class GameService {
 
     public List<GameSession> getMyGameSessions(Long studentId) {
         Student student = studentRepository.findById(studentId)
-            .orElseThrow(() -> new RuntimeException("Student not found"));
-    
+                .orElseThrow(() -> new RuntimeException("Student not found"));
 
         return student.getAssignedGames();
 
@@ -92,26 +90,26 @@ public class GameService {
     public List<Game> getAllGames() {
         return gameRepository.findAll();
     }
-    
+
     public Game getGameById(Long id) {
         return gameRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Game not found with id: " + id));
     }
-    
+
     public Game saveGame(Game game) {
         return gameRepository.save(game);
     }
 
     public GameQuestionDTO getCurrentQuestionDTO(Long gameSessionId) {
         GameSession session = gameSessionRepository.findById(gameSessionId)
-            .orElseThrow(() -> new RuntimeException("Game session not found"));
+                .orElseThrow(() -> new RuntimeException("Game session not found"));
 
         List<Question> questions = session.getGame().getStudySet().getQuestions();
         int index = session.getCurrentQuestionIndex();
 
         if (index < 0 || index >= questions.size()) {
             throw new RuntimeException("Invalid question index");
-     }
+        }
 
         Question currentQuestion = questions.get(index);
 
@@ -126,7 +124,7 @@ public class GameService {
     @Transactional
     public String submitAnswer(Long gameSessionId, Long questionId, String submittedAnswer) {
         GameSession session = gameSessionRepository.findById(gameSessionId)
-            .orElseThrow(() -> new RuntimeException("Game session not found"));
+                .orElseThrow(() -> new RuntimeException("Game session not found"));
 
         List<Question> questions = session.getGame().getStudySet().getQuestions();
         int index = session.getCurrentQuestionIndex();
@@ -157,18 +155,24 @@ public class GameService {
     public GameSession createSession(Long gameId, Long studentId) {
         Game game = gameRepository.findById(gameId)
                 .orElseThrow(() -> new RuntimeException("Game not found"));
-    
+
         Student student = studentRepository.findById(studentId)
                 .orElseThrow(() -> new RuntimeException("Student not found"));
-    
+
         GameSession session = new GameSession();
         session.setGame(game);
         session.setStudent(student);
         session.setScore(0);
         session.setCompleted(false);
-    
+
         return gameSessionRepository.save(session);
     }
-    
-    
+
+    public void deleteSession(Long gameSessionId) {
+        GameSession session = gameSessionRepository.findById(gameSessionId)
+                .orElseThrow(() -> new RuntimeException("Game session not found"));
+
+        gameSessionRepository.delete(session);
+    }
+
 }

@@ -39,6 +39,11 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    // Get all students
+    public List<User> getAllStudents() {
+        return userRepository.findByRole(UserRole.STUDENT);
+    }
+
     // Get user by ID
     public User getUserById(Long id) {
         return userRepository.findById(id)

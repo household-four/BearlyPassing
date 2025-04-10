@@ -1,6 +1,7 @@
 package bearly_passing.project.api;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,16 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import bearly_passing.project.domain.GameSession;
 import bearly_passing.project.domain.Student;
 import bearly_passing.project.domain.Teacher;
 import bearly_passing.project.domain.User;
 import bearly_passing.project.services.GameService;
 import bearly_passing.project.services.UserService;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,6 +29,12 @@ public class StudentController {
 
     @Autowired
     private GameService gameService;
+
+    @GetMapping("/all")
+    public List<User> getAllStudents() {
+        log.info("Fetching all students");
+        return userService.getAllStudents();
+    }
 
     @PostMapping("/create")
     public Student createStudent(@RequestParam String name) {

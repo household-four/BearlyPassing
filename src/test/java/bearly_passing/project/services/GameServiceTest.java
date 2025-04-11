@@ -3,7 +3,6 @@ package bearly_passing.project.services;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -28,7 +27,6 @@ import bearly_passing.project.domain.Question;
 import bearly_passing.project.domain.Student;
 import bearly_passing.project.domain.StudySet;
 import bearly_passing.project.domain.UserRole;
-import bearly_passing.project.dto.StudySetDTO;
 
 @ExtendWith(MockitoExtension.class)
 public class GameServiceTest {
@@ -52,10 +50,14 @@ public class GameServiceTest {
     private GameService gameService;
 
     private Student student;
+    private Question question;
     private StudySet studySet;
     private Game game;
+    private Game game2;
     private GameSession session;
+    private GameSession session2;
     private List<GameSession> aGameSessions;
+    private List<Game> games;
 
     @BeforeEach
     public void init() {
@@ -64,19 +66,34 @@ public class GameServiceTest {
         student.setUsername("Baylor");
         student.setRole(UserRole.STUDENT);
 
+        question = new Question();
+
         studySet = new StudySet();
         studySet.setCreator(student);
         studySet.setTitle("Bearly Passing");
         studySet.setDescription("How to pass every class.");
+
+        question.setStudySet(studySet);
 
         game = new Game();
         game.setCreator(student);
         game.setGameType(GameType.MATCHING);
         game.setStudySet(studySet);
 
+        game2 = new Game();
+        game2.setCreator(student);
+        game2.setGameType(GameType.ELIMINATION);
+        game2.setStudySet(studySet);
+
         session = new GameSession();
         session.setGame(game);
         session.setStudent(student);
+
+        session2 = new GameSession();
+        session2.setGame(game);
+        session2.setStudent(student);
+        session2.setScore(0);
+        session2.setCompleted(false);
 
         aGameSessions = new ArrayList<GameSession>();
         aGameSessions.add(session);
@@ -108,19 +125,76 @@ public class GameServiceTest {
         assertEquals(aGameSessions, assignedGames);
     }
 
-    // get all games
+    @Test
+    public void GameService_GetAllGames_ReturnGames() {
+        when(gameRepository.findAll()).thenReturn(games);
+
+        List<Game> savedGames = gameService.getAllGames();
+
+        assertEquals(games, savedGames);
+    }
     
-    // get game by id
+    @Test
+    public void GameService_GetGameById_ReturnGame() {
+        when(gameRepository.findById(game.getId())).thenReturn(Optional.of(game));
 
-    // get game session by id
+        Game savedGame = gameService.getGameById(game.getId());
 
-    // save game
+        assertEquals(game, savedGame);
+    }
+
+    @Test
+    public void GameService_GetGameSessionById_ReturnGameSession() {
+        when(gameSessionRepository.findById(session.getId())).thenReturn(Optional.of(session));
+
+        GameSession savedSession = gameService.getGameSessionById(session.getId());
+
+        assertEquals(game, savedSession);
+    }
+
+    @Test
+    public void GameService_SaveGame_ReturnGame() {
+        when(gameRepository.save(Mockito.any(Game.class))).thenReturn(game);
+
+        Game savedGame = gameService.saveGame(game);
+
+        assertEquals(game, savedGame);
+    }
 
     // get current question DTO
+    @Test
+    public void GameService_GetCurrentQuestionDTO_ReturnsGameQuestionDTO() {
+        GameSession session3 = new GameSession();
+        session3.setGame(game);
+        session3.setStudent(student);
+        session3.setScore(0);
+        session3.setCompleted(false);
+        session3.setCurrentQuestionIndex(1);
+
+        when(gameSessionRepository.findById(session.getId())).thenReturn(Optional.of(session3));
+
+
+    }
 
     // submit answer
 
-    // create session
+    @Test
+    public void GameService_CreateSession_ReturnGameSession() {
+        when(gameRepository.findById(game.getId())).thenReturn(Optional.of(game));
+        when(studentRepository.findById(student.getId())).thenReturn(Optional.of(student));
+        when(gameSessionRepository.save(Mockito.any(GameSession.class))).thenReturn(session2);
 
-    // delete session
+        GameSession savedSession = gameService.createSession(game.getId(),student.getId());
+
+        assertEquals(session2, savedSession);
+    }
+
+    @Test
+    public void GameService_DeleteSession_ReturnsVoid() {
+        when(gameSessionRepository.findById(session.getId())).thenReturn(Optional.of(session));
+       
+        doNothing().when(gameSessionRepository).delete(session);
+
+        assertAll(() -> gameService.deleteSession(session.getId()));
+    }
 }

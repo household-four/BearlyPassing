@@ -2118,3 +2118,127 @@ java.lang.NullPointerException: Cannot invoke "bearly_passing.project.domain.Gam
 2025-04-09T22:07:04.804-07:00  WARN 20892 --- [project] [SpringApplicationShutdownHook] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-232]
 2025-04-09T22:07:04.804-07:00  INFO 20892 --- [project] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
 2025-04-09T22:07:04.805-07:00  INFO 20892 --- [project] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+2025-04-10T18:16:50.859-05:00  INFO 13536 --- [project] [main] b.project.api.AdminControllerTest        : Starting AdminControllerTest using Java 23.0.2 with PID 13536 (started by Agent Argon in C:\Users\Agent Argon\BearlyPassing)
+2025-04-10T18:16:50.866-05:00  INFO 13536 --- [project] [main] b.project.api.AdminControllerTest        : No active profile set, falling back to 1 default profile: "default"
+2025-04-10T18:16:52.359-05:00  INFO 13536 --- [project] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-04-10T18:16:52.359-05:00  INFO 13536 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-04-10T18:16:52.359-05:00  INFO 13536 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2025-04-10T18:16:52.755-05:00  INFO 13536 --- [project] [main] b.project.api.AdminControllerTest        : Started AdminControllerTest in 2.228 seconds (process running for 3.073)
+2025-04-10T18:16:52.851-05:00  INFO 13536 --- [project] [main] b.project.api.AdminController            : Fetching all users
+2025-04-10T18:25:40.425-05:00  INFO 21980 --- [project] [main] b.project.api.AdminControllerTest        : Starting AdminControllerTest using Java 23.0.2 with PID 21980 (started by Agent Argon in C:\Users\Agent Argon\BearlyPassing)
+2025-04-10T18:25:40.425-05:00  INFO 21980 --- [project] [main] b.project.api.AdminControllerTest        : No active profile set, falling back to 1 default profile: "default"
+2025-04-10T18:25:41.851-05:00  INFO 21980 --- [project] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-04-10T18:25:41.851-05:00  INFO 21980 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-04-10T18:25:41.855-05:00  INFO 21980 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 4 ms
+2025-04-10T18:25:42.231-05:00  INFO 21980 --- [project] [main] b.project.api.AdminControllerTest        : Started AdminControllerTest in 2.138 seconds (process running for 2.982)
+2025-04-10T18:29:53.726-05:00  INFO 20180 --- [project] [main] b.project.api.AdminControllerTest        : Starting AdminControllerTest using Java 23.0.2 with PID 20180 (started by Agent Argon in C:\Users\Agent Argon\BearlyPassing)
+2025-04-10T18:29:53.727-05:00  INFO 20180 --- [project] [main] b.project.api.AdminControllerTest        : No active profile set, falling back to 1 default profile: "default"
+2025-04-10T18:29:55.199-05:00  INFO 20180 --- [project] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-04-10T18:29:55.199-05:00  INFO 20180 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-04-10T18:29:55.200-05:00  INFO 20180 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2025-04-10T18:29:55.563-05:00  INFO 20180 --- [project] [main] b.project.api.AdminControllerTest        : Started AdminControllerTest in 2.175 seconds (process running for 3.01)
+2025-04-10T18:29:55.659-05:00  INFO 20180 --- [project] [main] b.project.api.AdminController            : Fetching all users
+2025-04-10T18:30:33.191-05:00  INFO 404 --- [project] [main] b.project.api.AdminControllerTest        : Starting AdminControllerTest using Java 23.0.2 with PID 404 (started by Agent Argon in C:\Users\Agent Argon\BearlyPassing)
+2025-04-10T18:30:33.191-05:00  INFO 404 --- [project] [main] b.project.api.AdminControllerTest        : No active profile set, falling back to 1 default profile: "default"
+2025-04-10T18:30:34.649-05:00  INFO 404 --- [project] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-04-10T18:30:34.649-05:00  INFO 404 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-04-10T18:30:34.655-05:00  INFO 404 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 6 ms
+2025-04-10T18:30:35.038-05:00  INFO 404 --- [project] [main] b.project.api.AdminControllerTest        : Started AdminControllerTest in 2.181 seconds (process running for 3.008)
+2025-04-10T18:31:17.363-05:00  INFO 13644 --- [project] [main] b.project.api.AdminControllerTest        : Starting AdminControllerTest using Java 23.0.2 with PID 13644 (started by Agent Argon in C:\Users\Agent Argon\BearlyPassing)
+2025-04-10T18:31:17.369-05:00  INFO 13644 --- [project] [main] b.project.api.AdminControllerTest        : No active profile set, falling back to 1 default profile: "default"
+2025-04-10T18:31:18.795-05:00  INFO 13644 --- [project] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-04-10T18:31:18.795-05:00  INFO 13644 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-04-10T18:31:18.800-05:00  INFO 13644 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 5 ms
+2025-04-10T18:31:19.154-05:00  INFO 13644 --- [project] [main] b.project.api.AdminControllerTest        : Started AdminControllerTest in 2.134 seconds (process running for 2.98)
+2025-04-10T18:31:19.250-05:00  INFO 13644 --- [project] [main] b.project.api.AdminController            : Populating dummy data
+2025-04-10T18:33:02.541-05:00  INFO 340 --- [project] [main] b.project.api.AdminControllerTest        : Starting AdminControllerTest using Java 23.0.2 with PID 340 (started by Agent Argon in C:\Users\Agent Argon\BearlyPassing)
+2025-04-10T18:33:02.541-05:00  INFO 340 --- [project] [main] b.project.api.AdminControllerTest        : No active profile set, falling back to 1 default profile: "default"
+2025-04-10T18:33:03.939-05:00  INFO 340 --- [project] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-04-10T18:33:03.939-05:00  INFO 340 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-04-10T18:33:03.939-05:00  INFO 340 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2025-04-10T18:33:04.291-05:00  INFO 340 --- [project] [main] b.project.api.AdminControllerTest        : Started AdminControllerTest in 2.075 seconds (process running for 2.908)
+2025-04-10T18:33:04.389-05:00  INFO 340 --- [project] [main] b.project.api.AdminController            : Getting class for teacher 1
+2025-04-10T18:33:04.425-05:00  INFO 340 --- [project] [main] b.project.api.AdminController            : Populating dummy data
+2025-04-10T18:33:04.439-05:00  INFO 340 --- [project] [main] b.project.api.AdminController            : Fetching all users
+2025-04-10T18:33:04.529-05:00  INFO 340 --- [project] [main] b.project.api.AdminController            : Getting grades for student 1
+2025-04-10T18:38:08.597-05:00  INFO 9204 --- [project] [main] b.project.api.GameControllerTest         : Starting GameControllerTest using Java 23.0.2 with PID 9204 (started by Agent Argon in C:\Users\Agent Argon\BearlyPassing)
+2025-04-10T18:38:08.602-05:00  INFO 9204 --- [project] [main] b.project.api.GameControllerTest         : No active profile set, falling back to 1 default profile: "default"
+2025-04-10T18:38:10.070-05:00  INFO 9204 --- [project] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-04-10T18:38:10.070-05:00  INFO 9204 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-04-10T18:38:10.070-05:00  INFO 9204 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2025-04-10T18:38:10.446-05:00  INFO 9204 --- [project] [main] b.project.api.GameControllerTest         : Started GameControllerTest in 2.167 seconds (process running for 3.004)
+2025-04-10T18:38:39.930-05:00  INFO 12300 --- [project] [main] b.project.api.GameControllerTest         : Starting GameControllerTest using Java 23.0.2 with PID 12300 (started by Agent Argon in C:\Users\Agent Argon\BearlyPassing)
+2025-04-10T18:38:39.930-05:00  INFO 12300 --- [project] [main] b.project.api.GameControllerTest         : No active profile set, falling back to 1 default profile: "default"
+2025-04-10T18:38:41.423-05:00  INFO 12300 --- [project] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-04-10T18:38:41.423-05:00  INFO 12300 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-04-10T18:38:41.423-05:00  INFO 12300 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2025-04-10T18:38:41.812-05:00  INFO 12300 --- [project] [main] b.project.api.GameControllerTest         : Started GameControllerTest in 2.259 seconds (process running for 3.126)
+2025-04-10T18:38:41.910-05:00  INFO 12300 --- [project] [main] b.project.api.GameController             : Getting all games
+2025-04-10T18:42:03.572-05:00  INFO 12740 --- [project] [main] b.project.api.GameControllerTest         : Starting GameControllerTest using Java 23.0.2 with PID 12740 (started by Agent Argon in C:\Users\Agent Argon\BearlyPassing)
+2025-04-10T18:42:03.576-05:00  INFO 12740 --- [project] [main] b.project.api.GameControllerTest         : No active profile set, falling back to 1 default profile: "default"
+2025-04-10T18:42:04.988-05:00  INFO 12740 --- [project] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-04-10T18:42:04.988-05:00  INFO 12740 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-04-10T18:42:04.988-05:00  INFO 12740 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2025-04-10T18:42:05.357-05:00  INFO 12740 --- [project] [main] b.project.api.GameControllerTest         : Started GameControllerTest in 2.118 seconds (process running for 2.954)
+2025-04-10T18:59:18.416-05:00  INFO 7208 --- [project] [main] b.project.api.GameControllerTest         : Starting GameControllerTest using Java 23.0.2 with PID 7208 (started by Agent Argon in C:\Users\Agent Argon\BearlyPassing)
+2025-04-10T18:59:18.416-05:00  INFO 7208 --- [project] [main] b.project.api.GameControllerTest         : No active profile set, falling back to 1 default profile: "default"
+2025-04-10T18:59:19.871-05:00  INFO 7208 --- [project] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-04-10T18:59:19.871-05:00  INFO 7208 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-04-10T18:59:19.875-05:00  INFO 7208 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 4 ms
+2025-04-10T18:59:20.232-05:00  INFO 7208 --- [project] [main] b.project.api.GameControllerTest         : Started GameControllerTest in 2.146 seconds (process running for 2.987)
+2025-04-10T18:59:43.165-05:00  INFO 4820 --- [project] [main] b.project.api.GameControllerTest         : Starting GameControllerTest using Java 23.0.2 with PID 4820 (started by Agent Argon in C:\Users\Agent Argon\BearlyPassing)
+2025-04-10T18:59:43.166-05:00  INFO 4820 --- [project] [main] b.project.api.GameControllerTest         : No active profile set, falling back to 1 default profile: "default"
+2025-04-10T18:59:44.591-05:00  INFO 4820 --- [project] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-04-10T18:59:44.591-05:00  INFO 4820 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-04-10T18:59:44.593-05:00  INFO 4820 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2025-04-10T18:59:44.959-05:00  INFO 4820 --- [project] [main] b.project.api.GameControllerTest         : Started GameControllerTest in 2.118 seconds (process running for 2.972)
+2025-04-10T18:59:51.090-05:00  INFO 18976 --- [project] [main] b.project.api.GameControllerTest         : Starting GameControllerTest using Java 23.0.2 with PID 18976 (started by Agent Argon in C:\Users\Agent Argon\BearlyPassing)
+2025-04-10T18:59:51.091-05:00  INFO 18976 --- [project] [main] b.project.api.GameControllerTest         : No active profile set, falling back to 1 default profile: "default"
+2025-04-10T18:59:52.503-05:00  INFO 18976 --- [project] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-04-10T18:59:52.504-05:00  INFO 18976 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-04-10T18:59:52.505-05:00  INFO 18976 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2025-04-10T18:59:52.876-05:00  INFO 18976 --- [project] [main] b.project.api.GameControllerTest         : Started GameControllerTest in 2.122 seconds (process running for 2.957)
+2025-04-10T19:02:27.400-05:00  INFO 15848 --- [project] [main] b.project.api.GameControllerTest         : Starting GameControllerTest using Java 23.0.2 with PID 15848 (started by Agent Argon in C:\Users\Agent Argon\BearlyPassing)
+2025-04-10T19:02:27.401-05:00  INFO 15848 --- [project] [main] b.project.api.GameControllerTest         : No active profile set, falling back to 1 default profile: "default"
+2025-04-10T19:02:28.860-05:00  INFO 15848 --- [project] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-04-10T19:02:28.860-05:00  INFO 15848 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-04-10T19:02:28.861-05:00  INFO 15848 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2025-04-10T19:02:29.223-05:00  INFO 15848 --- [project] [main] b.project.api.GameControllerTest         : Started GameControllerTest in 2.171 seconds (process running for 3.043)
+2025-04-10T19:07:14.674-05:00  INFO 15584 --- [project] [main] b.project.api.GameControllerTest         : Starting GameControllerTest using Java 23.0.2 with PID 15584 (started by Agent Argon in C:\Users\Agent Argon\BearlyPassing)
+2025-04-10T19:07:14.676-05:00  INFO 15584 --- [project] [main] b.project.api.GameControllerTest         : No active profile set, falling back to 1 default profile: "default"
+2025-04-10T19:07:16.118-05:00  INFO 15584 --- [project] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-04-10T19:07:16.118-05:00  INFO 15584 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-04-10T19:07:16.118-05:00  INFO 15584 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2025-04-10T19:07:16.482-05:00  INFO 15584 --- [project] [main] b.project.api.GameControllerTest         : Started GameControllerTest in 2.14 seconds (process running for 2.971)
+2025-04-10T19:07:37.239-05:00  INFO 17908 --- [project] [main] b.project.api.GameControllerTest         : Starting GameControllerTest using Java 23.0.2 with PID 17908 (started by Agent Argon in C:\Users\Agent Argon\BearlyPassing)
+2025-04-10T19:07:37.243-05:00  INFO 17908 --- [project] [main] b.project.api.GameControllerTest         : No active profile set, falling back to 1 default profile: "default"
+2025-04-10T19:07:38.695-05:00  INFO 17908 --- [project] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-04-10T19:07:38.698-05:00  INFO 17908 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-04-10T19:07:38.698-05:00  INFO 17908 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2025-04-10T19:07:39.070-05:00  INFO 17908 --- [project] [main] b.project.api.GameControllerTest         : Started GameControllerTest in 2.155 seconds (process running for 2.995)
+2025-04-10T19:09:43.863-05:00  INFO 10492 --- [project] [main] b.project.api.GameControllerTest         : Starting GameControllerTest using Java 23.0.2 with PID 10492 (started by Agent Argon in C:\Users\Agent Argon\BearlyPassing)
+2025-04-10T19:09:43.864-05:00  INFO 10492 --- [project] [main] b.project.api.GameControllerTest         : No active profile set, falling back to 1 default profile: "default"
+2025-04-10T19:09:45.292-05:00  INFO 10492 --- [project] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-04-10T19:09:45.292-05:00  INFO 10492 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-04-10T19:09:45.293-05:00  INFO 10492 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2025-04-10T19:09:45.661-05:00  INFO 10492 --- [project] [main] b.project.api.GameControllerTest         : Started GameControllerTest in 2.134 seconds (process running for 2.984)
+2025-04-10T19:09:50.242-05:00  INFO 16812 --- [project] [main] b.project.api.GameControllerTest         : Starting GameControllerTest using Java 23.0.2 with PID 16812 (started by Agent Argon in C:\Users\Agent Argon\BearlyPassing)
+2025-04-10T19:09:50.243-05:00  INFO 16812 --- [project] [main] b.project.api.GameControllerTest         : No active profile set, falling back to 1 default profile: "default"
+2025-04-10T19:09:51.671-05:00  INFO 16812 --- [project] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-04-10T19:09:51.672-05:00  INFO 16812 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-04-10T19:09:51.673-05:00  INFO 16812 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2025-04-10T19:09:52.028-05:00  INFO 16812 --- [project] [main] b.project.api.GameControllerTest         : Started GameControllerTest in 2.119 seconds (process running for 2.954)
+2025-04-10T19:19:47.343-05:00  INFO 21200 --- [project] [main] b.project.api.GameSessionControllerTest  : Starting GameSessionControllerTest using Java 23.0.2 with PID 21200 (started by Agent Argon in C:\Users\Agent Argon\BearlyPassing)
+2025-04-10T19:19:47.344-05:00  INFO 21200 --- [project] [main] b.project.api.GameSessionControllerTest  : No active profile set, falling back to 1 default profile: "default"
+2025-04-10T19:19:48.804-05:00  INFO 21200 --- [project] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-04-10T19:19:48.804-05:00  INFO 21200 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-04-10T19:19:48.805-05:00  INFO 21200 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2025-04-10T19:19:49.173-05:00  INFO 21200 --- [project] [main] b.project.api.GameSessionControllerTest  : Started GameSessionControllerTest in 2.159 seconds (process running for 2.996)
+2025-04-10T19:19:49.274-05:00  WARN 21200 --- [project] [main] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Method parameter 'gameSessionId': Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; For input string: "null"]
+2025-04-10T19:19:58.838-05:00  INFO 14968 --- [project] [main] b.project.api.GameSessionControllerTest  : Starting GameSessionControllerTest using Java 23.0.2 with PID 14968 (started by Agent Argon in C:\Users\Agent Argon\BearlyPassing)
+2025-04-10T19:19:58.839-05:00  INFO 14968 --- [project] [main] b.project.api.GameSessionControllerTest  : No active profile set, falling back to 1 default profile: "default"
+2025-04-10T19:20:00.349-05:00  INFO 14968 --- [project] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-04-10T19:20:00.349-05:00  INFO 14968 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-04-10T19:20:00.350-05:00  INFO 14968 --- [project] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2025-04-10T19:20:00.736-05:00  INFO 14968 --- [project] [main] b.project.api.GameSessionControllerTest  : Started GameSessionControllerTest in 2.249 seconds (process running for 3.166)
+2025-04-10T19:20:00.832-05:00  WARN 14968 --- [project] [main] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Method parameter 'gameSessionId': Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; For input string: "null"]

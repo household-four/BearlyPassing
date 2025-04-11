@@ -24,6 +24,7 @@ import bearly_passing.project.domain.Game;
 import bearly_passing.project.domain.Question;
 import bearly_passing.project.domain.StudySet;
 import bearly_passing.project.domain.User;
+import bearly_passing.project.dto.QuestionDTO;
 import bearly_passing.project.dto.StudySetDTO;
 import jakarta.transaction.Transactional;
 
@@ -80,6 +81,33 @@ public class StudySetService {
         }
 
         return studySetRepository.save(new_set);
+    }
+
+    @Transactional
+    public StudySet loadJsonSet(StudySetDTO studySet) throws IOException {
+        System.out.println("StudySet: " + studySet.getTitle());
+        System.out.println("StudySet: " + studySet.getDescription());
+
+        User user = userRepository.findById(studySet.getCreator().getId())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        System.out.println("user: " + user.getName());
+
+        StudySet newStudySet = new StudySet();
+        newStudySet.setTitle(studySet.getTitle());
+        newStudySet.setDescription(studySet.getDescription());
+        newStudySet.setCreator(user);
+
+        for (QuestionDTO question : studySet.getQuestions()) {
+            System.out.println("question: " + question.getBody());
+            Question newQuestion = new Question();
+            newQuestion.setStudySet(newStudySet);
+            newQuestion.setBody(question.getBody());
+            newQuestion.setCorrectAnswer(question.getCorrectAnswer());
+            newQuestion.setDifficulty(question.getDifficulty());
+            questionRepository.save(newQuestion);
+            newStudySet.getQuestions().add(newQuestion);
+        }
+        return studySetRepository.save(newStudySet);
     }
 
     @Transactional

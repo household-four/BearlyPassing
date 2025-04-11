@@ -46,6 +46,14 @@ public class StudySetController {
         return StudySetMapper.toDTO(imported);
     }
 
+    @PostMapping("/json")
+    public StudySetDTO importJsonSet(@RequestBody StudySetDTO studySet) throws IOException {
+        log.info("Importing study set from JSON {}", studySet.getTitle());
+        StudySet imported = studySetService.loadJsonSet(studySet);
+        System.out.println("imported set" + imported);
+        return StudySetMapper.toDTO(imported);
+    }
+
     @PostMapping("/canvas")
     public StudySetDTO importCanvasSet(@RequestParam String canvasFile) throws IOException {
         log.info("Importing canvas file");

@@ -3,6 +3,8 @@ package bearly_passing.project.services;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -14,12 +16,15 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import bearly_passing.project.data.QuestionRepository;
+import bearly_passing.project.data.StudentRepository;
 import bearly_passing.project.data.StudySetRepository;
 import bearly_passing.project.data.UserRepository;
+import bearly_passing.project.domain.Game;
 import bearly_passing.project.domain.Question;
 import bearly_passing.project.domain.Student;
 import bearly_passing.project.domain.StudySet;
 import bearly_passing.project.domain.UserRole;
+import bearly_passing.project.dto.StudySetDTO;
 
 @ExtendWith(MockitoExtension.class)
 public class StudySetServiceTest {
@@ -31,6 +36,9 @@ public class StudySetServiceTest {
     private UserRepository userRepository;
 
     @Mock
+    private StudentRepository studentRepository;
+
+    @Mock
     private QuestionRepository questionRepository;
 
     @InjectMocks
@@ -38,10 +46,14 @@ public class StudySetServiceTest {
 
     private Student student;
     private StudySet studySet;
+    private List<Game> games;
+    private StudySetDTO studySetDTO;
+    private StudySet studySet2;
+    private List<StudySet> studySets;
     private Question question;
 
     @BeforeEach
-    public void init() throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+    public void init() {
         student = new Student();
             student.setId(11111111L);
             student.setUsername("Baylor");
@@ -51,6 +63,20 @@ public class StudySetServiceTest {
             studySet.setCreator(student);
             studySet.setTitle("Bearly Passing");
             studySet.setDescription("How to pass every class.");
+
+        studySetDTO = new StudySetDTO();
+            studySet.setCreator(student);
+            studySet.setTitle("Bearly Passing");
+            studySet.setDescription("How to pass every class.");
+
+        studySet2 = new StudySet();
+            studySet2.setCreator(student);
+            studySet2.setTitle("Bearly Passing 2");
+            studySet2.setDescription("How to pass some classes.");
+
+        studySets = new ArrayList<StudySet>();
+            studySets.add(studySet);
+            studySets.add(studySet2);
 
         question = new Question();
             question.setStudySet(studySet);
@@ -102,9 +128,32 @@ public class StudySetServiceTest {
         assertEquals(studySet, savedStudySet);
     }
 
-    // get all study sets
+    @Test
+    public void StudySetService_GetAllStudySets_ReturnsStudySets() {
+        when(studySetRepository.findAll()).thenReturn(studySets);
 
-    // create study set
+        List<StudySet> savedStudySets = studySetService.getAllStudySets();
 
-    // get games by study set id
+        assertEquals(studySets, savedStudySets);
+    }
+
+    @Test
+    public void StudySetService_CreateStudySet_ReturnsStudySet() {
+        when(studySetRepository.save(Mockito.any(StudySet.class))).thenReturn(studySet);
+
+        StudySet newStudySet = studySetService.createStudySet(studySetDTO);
+
+        assertEquals(studySet, newStudySet);
+    }
+
+    // how to add games to a study set?
+    @Test
+    public void StudySetService_GetGamesByStudySetId_ReturnsGames() {
+        when(studySetRepository.findById(studySet.getId())).thenReturn(Optional.of(studySet));
+
+        List<Game> savedGames = studySetService.getGamesByStudySetId(studySet.getId());
+
+        assertEquals(games, savedGames);
+    }
+
 }

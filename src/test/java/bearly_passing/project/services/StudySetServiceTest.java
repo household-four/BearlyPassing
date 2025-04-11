@@ -20,6 +20,7 @@ import bearly_passing.project.data.StudentRepository;
 import bearly_passing.project.data.StudySetRepository;
 import bearly_passing.project.data.UserRepository;
 import bearly_passing.project.domain.Game;
+import bearly_passing.project.domain.GameType;
 import bearly_passing.project.domain.Question;
 import bearly_passing.project.domain.Student;
 import bearly_passing.project.domain.StudySet;
@@ -46,6 +47,7 @@ public class StudySetServiceTest {
 
     private Student student;
     private StudySet studySet;
+    private Game game;
     private List<Game> games;
     private StudySetDTO studySetDTO;
     private StudySet studySet2;
@@ -82,6 +84,15 @@ public class StudySetServiceTest {
             question.setStudySet(studySet);
 
         studySet.addQuestion(question);
+
+        games = new ArrayList<>();
+        game = new Game();
+        game.setId(3L);
+        game.setCreator(student);
+        game.setGameType(GameType.MATCHING);
+        game.setStudySet(studySet);
+
+        games.add(game);
     }
 
     @Test

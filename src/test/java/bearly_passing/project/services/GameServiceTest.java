@@ -86,6 +86,7 @@ public class GameServiceTest {
         game2.setStudySet(studySet);
 
         session = new GameSession();
+        session.setId(1L);
         session.setGame(game);
         session.setStudent(student);
 
@@ -161,23 +162,6 @@ public class GameServiceTest {
         assertEquals(game, savedGame);
     }
 
-    // get current question DTO
-    @Test
-    public void GameService_GetCurrentQuestionDTO_ReturnsGameQuestionDTO() {
-        GameSession session3 = new GameSession();
-        session3.setGame(game);
-        session3.setStudent(student);
-        session3.setScore(0);
-        session3.setCompleted(false);
-        session3.setCurrentQuestionIndex(1);
-
-        when(gameSessionRepository.findById(session.getId())).thenReturn(Optional.of(session3));
-
-
-    }
-
-    // submit answer
-
     @Test
     public void GameService_CreateSession_ReturnGameSession() {
         when(gameRepository.findById(game.getId())).thenReturn(Optional.of(game));
@@ -197,4 +181,23 @@ public class GameServiceTest {
 
         assertAll(() -> gameService.deleteSession(session.getId()));
     }
+
+        // get current question DTO
+    /*
+    @Test
+    public void GameService_GetCurrentQuestionDTO_ReturnsGameQuestionDTO() {
+        GameSession session3 = new GameSession();
+        session3.setGame(game);
+        session3.setStudent(student);
+        session3.setScore(0);
+        session3.setCompleted(false);
+        session3.setCurrentQuestionIndex(1);
+
+        when(gameSessionRepository.findById(session.getId())).thenReturn(Optional.of(session3));
+
+
+    }
+    */
+
+    // submit answer
 }

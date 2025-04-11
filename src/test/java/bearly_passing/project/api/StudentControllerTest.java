@@ -31,7 +31,7 @@ import bearly_passing.project.domain.UserRole;
 import bearly_passing.project.services.GameService;
 import bearly_passing.project.services.UserService;
 
-@WebMvcTest(controllers = GameSessionController.class)
+@WebMvcTest(controllers = StudentController.class)
 @AutoConfigureMockMvc(addFilters = false)
 @ExtendWith(MockitoExtension.class)
 public class StudentControllerTest {

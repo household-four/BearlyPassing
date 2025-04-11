@@ -18,6 +18,7 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -30,7 +31,7 @@ import bearly_passing.project.domain.UserRole;
 import bearly_passing.project.dto.QuestionDTO;
 import bearly_passing.project.services.QuestionService;
 
-@WebMvcTest(controllers = GameSessionController.class)
+@WebMvcTest(controllers = QuestionController.class)
 @AutoConfigureMockMvc(addFilters = false)
 @ExtendWith(MockitoExtension.class)
 public class QuestionControllerTest {
@@ -64,6 +65,7 @@ public class QuestionControllerTest {
             studySet.setDescription("How to pass every class.");
        
         question = new Question();
+        question.setId(100L);
         question.setBody("What is the mascot of Baylor?");
         question.setAnswer("Bear");
         question.setGivenAnswer("Bear");
@@ -72,6 +74,7 @@ public class QuestionControllerTest {
         question.setOptions(Arrays.asList("Tiger", "Eagle", "Bear", "Lion"));
 
         question2 = new Question();
+        question2.setId(200L);
         question2.setBody("What is the mascot of Baylor?");
         question2.setAnswer("Bear");
         question2.setGivenAnswer("Bear");
@@ -83,16 +86,16 @@ public class QuestionControllerTest {
         questions.add(question);
 
         questionDTO = new QuestionDTO();
+        questionDTO.setId(100L);
     }
 
     @Test
-    public void GetAllQuestions() throws Exception {
-        // fix this
-        when(questionService.getAllQuestions()).thenReturn(null);
+    public void Question_Controller_GetAllQuestions_ReturnsQuestionList() throws Exception {
+        when(questionService.getAllQuestions()).thenReturn(questions);
 
-        // something about number of questions...
-        mockMvc.perform(get("api/question/all/"))
-            .andExpect(status().isOk());
+        mockMvc.perform(get("/api/question/all"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.length()").value(questions.size()));
     }
 
     @Test
@@ -104,31 +107,31 @@ public class QuestionControllerTest {
             .content(objectMapper.writeValueAsString(questionDTO)))
             
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$.id", CoreMatchers.is(questionDTO.getId())));
+            .andExpect(jsonPath("$.id", CoreMatchers.is(questionDTO.getId().intValue())));
     }
 
     @Test
     public void QuestionController_CreateQuestion_ReturnCreated() throws Exception {
         given(questionService.createQuestionWithStudySetValidation(ArgumentMatchers.any()))
-            .willAnswer((invocation -> invocation.getArgument(0)));
+            .willReturn(question);
 
         mockMvc.perform(post("/api/question/create")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(questionDTO)))
+            .content(objectMapper.writeValueAsString(question)))
 
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$.id", CoreMatchers.is(questionDTO.getId())));
+            .andExpect(jsonPath("$.id", CoreMatchers.is(questionDTO.getId().intValue())));
     }
 
     @Test
     public void QuestionController_UpdateQuestion_ReturnUpdated() throws Exception {
-        when(questionService.updateQuestion(question.getId(), question2)).thenReturn(question2);
+        when(questionService.updateQuestion(eq(question.getId()), ArgumentMatchers.any(Question.class))).thenReturn(question2);
 
         mockMvc.perform(put("/api/question/update/" + question.getId())
             .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(questionDTO)))
+            .content(objectMapper.writeValueAsString(question)))
 
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$.id", CoreMatchers.is(questionDTO.getId())));
+            .andExpect(jsonPath("$.id", CoreMatchers.is(question2.getId().intValue())));
     }
 }

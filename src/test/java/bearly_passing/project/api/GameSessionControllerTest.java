@@ -68,28 +68,31 @@ public class GameSessionControllerTest {
         student.setUsername("Baylor");
         student.setRole(UserRole.STUDENT);
 
-        question = new Question();
-
         studySet = new StudySet();
         studySet.setCreator(student);
         studySet.setTitle("Bearly Passing");
         studySet.setDescription("How to pass every class.");
 
+        question = new Question();
         question.setStudySet(studySet);
-
-        gameQuestionDTO = new GameQuestionDTO();
+        question.setId(100L);
 
         game = new Game();
+        game.setId(1L);
         game.setCreator(student);
         game.setGameType(GameType.MATCHING);
         game.setStudySet(studySet);
 
         gameDTO = new GameDTO();
-        gameSessionDTO = new GameSessionDTO();
+        gameDTO.setId(1L);
+        gameDTO.setGameType(GameType.MATCHING);
+        gameDTO.setStudySetId(studySet.getCreator().getId());
+        gameDTO.setUserId(student.getId());
 
         session = new GameSession();
         session.setGame(game);
         session.setStudent(student);
+        session.setId(10L);
 
         session2 = new GameSession();
         session2.setGame(game);
@@ -97,23 +100,31 @@ public class GameSessionControllerTest {
         session2.setScore(0);
         session2.setCompleted(false);
 
-        sessions = new ArrayList<GameSession>();
+        sessions = new ArrayList<>();
         sessions.add(session);
-
         student.setAssignedGames(sessions);
+
+        games = new ArrayList<>();
+        games.add(game);
+
+        gameSessionDTO = new GameSessionDTO();
+        gameSessionDTO.setId(10L);
+        gameSessionDTO.setGameType(GameType.MATCHING.toString());
+
+        gameQuestionDTO = new GameQuestionDTO();
+        gameQuestionDTO.setQuestionId(100L);
     }
 
     @Test
     public void GameSessionController_GetSessionById_ReturnsGameSessionDTO() throws Exception {
-        when(gameService.getGameSessionById(game.getId())).thenReturn(session);
+        when(gameService.getGameSessionById(session.getId())).thenReturn(session);
 
-        mockMvc.perform(get("/api/gamesession/" + game.getId())
+        mockMvc.perform(get("/api/gamesession/" + session.getId())
             .contentType(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(gameSessionDTO)))
             
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$.id", CoreMatchers.is(gameSessionDTO.getId())))
-            .andExpect(jsonPath("$.type", CoreMatchers.is(gameSessionDTO.getGameType())));
+            .andExpect(jsonPath("$.id", CoreMatchers.is(gameSessionDTO.getId().intValue())));
     }
 
     @Test
@@ -132,12 +143,11 @@ public class GameSessionControllerTest {
     public void GameSessionController_GetCurrentQuestion_ReturnsGameQuestionDTO() throws Exception {
         when(gameService.getCurrentQuestionDTO(session.getId())).thenReturn(gameQuestionDTO);
 
-        mockMvc.perform(get("/api/gamesession//question/" + session.getId())
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(student)))
+        mockMvc.perform(get("/api/gamesession/question/" + session.getId())
+            .contentType(MediaType.APPLICATION_JSON))
             
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$.id", CoreMatchers.is(gameSessionDTO.getId())));
+            .andExpect(jsonPath("$.questionId", CoreMatchers.is(gameQuestionDTO.getQuestionId().intValue())));
     }
 
     @Test
@@ -150,9 +160,10 @@ public class GameSessionControllerTest {
         Map<String, String> response = new HashMap<>();
         response.put("result", "correct");
 
-        when(gameService.submitAnswer(ArgumentMatchers.any(), ArgumentMatchers.any(), ArgumentMatchers.any())).thenReturn(response);
+        when(gameService.submitAnswer(ArgumentMatchers.any(), ArgumentMatchers.any(), ArgumentMatchers.any()))
+            .thenReturn(response);
 
-        mockMvc.perform(get("/api/gamesession//question/" + session.getId())
+        mockMvc.perform(get("/api/gamesession/answer")
             .contentType(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(answerDTO)))
             

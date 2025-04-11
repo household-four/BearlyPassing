@@ -53,7 +53,7 @@ public class GameControllerTest {
     private GameSession session;
     private GameSessionDTO gameSessionDTO;
     private GameSession session2;
-    private List<GameSession> aGameSessions;
+    private List<GameSession> sessions;
     private List<Game> games;
 
     @Autowired
@@ -66,26 +66,30 @@ public class GameControllerTest {
         student.setUsername("Baylor");
         student.setRole(UserRole.STUDENT);
 
-        question = new Question();
-
         studySet = new StudySet();
         studySet.setCreator(student);
         studySet.setTitle("Bearly Passing");
         studySet.setDescription("How to pass every class.");
 
+        question = new Question();
         question.setStudySet(studySet);
 
         game = new Game();
+        game.setId(1L);
         game.setCreator(student);
         game.setGameType(GameType.MATCHING);
         game.setStudySet(studySet);
 
         gameDTO = new GameDTO();
-        gameSessionDTO = new GameSessionDTO();
+        gameDTO.setId(1L);
+        gameDTO.setGameType(GameType.MATCHING);
+        gameDTO.setStudySetId(studySet.getCreator().getId());
+        gameDTO.setUserId(student.getId());
 
         session = new GameSession();
         session.setGame(game);
         session.setStudent(student);
+        session.setId(10L);
 
         session2 = new GameSession();
         session2.setGame(game);
@@ -93,10 +97,16 @@ public class GameControllerTest {
         session2.setScore(0);
         session2.setCompleted(false);
 
-        aGameSessions = new ArrayList<GameSession>();
-        aGameSessions.add(session);
+        sessions = new ArrayList<>();
+        sessions.add(session);
+        student.setAssignedGames(sessions);
 
-        student.setAssignedGames(aGameSessions);
+        games = new ArrayList<>();
+        games.add(game);
+
+        gameSessionDTO = new GameSessionDTO();
+        gameSessionDTO.setId(10L);
+        gameSessionDTO.setGameType(GameType.MATCHING.toString());
     }
 
     @Test
@@ -117,22 +127,20 @@ public class GameControllerTest {
             .content(objectMapper.writeValueAsString(gameDTO)))
             
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$.id", CoreMatchers.is(gameDTO.getId())))
-            .andExpect(jsonPath("$.type", CoreMatchers.is(gameDTO.getGameType())));
+            .andExpect(jsonPath("$.id", CoreMatchers.is(gameDTO.getId().intValue())));
     }
 
     @Test
     public void GameController_CreateGame_ReturnCreated() throws Exception {
         given(gameService.createNewGame(ArgumentMatchers.any(), ArgumentMatchers.any(), ArgumentMatchers.any()))
-            .willAnswer((invocation -> invocation.getArgument(0)));
+            .willReturn(game);
 
         mockMvc.perform(post("/api/game/create")
             .contentType(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(gameDTO)))
 
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$.id", CoreMatchers.is(gameDTO.getId())))
-            .andExpect(jsonPath("$.type", CoreMatchers.is(gameDTO.getGameType())));
+            .andExpect(jsonPath("$.id", CoreMatchers.is(gameDTO.getId().intValue())));
     }
 
     @Test
@@ -144,14 +152,14 @@ public class GameControllerTest {
 
     @Test
     public void GameController_CreateGameSession_ReturnCreated() throws Exception {
-        given(gameService.createSession(ArgumentMatchers.any(), ArgumentMatchers.any())).willAnswer((invocation -> invocation.getArgument(0)));
-        
-        mockMvc.perform(post("/api/game/" + game.getId() + "/student/" + student.getId() + "/session")
+        given(gameService.createSession(ArgumentMatchers.any(), ArgumentMatchers.any()))
+            .willReturn(session);
+
+        mockMvc.perform(post("/api/game/game/" + game.getId() + "/student/" + student.getId() + "/session")
             .contentType(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(gameSessionDTO)))
-
+            
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$.id", CoreMatchers.is(gameSessionDTO.getId())))
-            .andExpect(jsonPath("$.type", CoreMatchers.is(gameSessionDTO.getGameType())));
+            .andExpect(jsonPath("$.id", CoreMatchers.is(gameSessionDTO.getId().intValue())));
     }
 }

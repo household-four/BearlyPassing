@@ -150,7 +150,7 @@ public class GameServiceTest {
 
         GameSession savedSession = gameService.getGameSessionById(session.getId());
 
-        assertEquals(game, savedSession);
+        assertEquals(session, savedSession);
     }
 
     @Test

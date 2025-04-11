@@ -163,10 +163,10 @@ public class GameSessionControllerTest {
         when(gameService.submitAnswer(ArgumentMatchers.any(), ArgumentMatchers.any(), ArgumentMatchers.any()))
             .thenReturn(response);
 
-        mockMvc.perform(get("/api/gamesession/answer")
+        mockMvc.perform(post("/api/gamesession/answer")
             .contentType(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(answerDTO)))
-            
+
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.result").value("correct"));
     }

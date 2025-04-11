@@ -32,6 +32,10 @@ public class StudySet {
     public Long getId() {
         return id;
     }
+    
+    public Long setId(Long id) {
+        return this.id = id;
+    }
 
     public String getTitle() {
         return title;

@@ -62,6 +62,7 @@ public class StudySetServiceTest {
             student.setRole(UserRole.STUDENT);
 
         studySet = new StudySet();
+            studySet.setId(1L);
             studySet.setCreator(student);
             studySet.setTitle("Bearly Passing");
             studySet.setDescription("How to pass every class.");
@@ -93,6 +94,8 @@ public class StudySetServiceTest {
         game.setStudySet(studySet);
 
         games.add(game);
+
+        studySet.getGames().add(game);
     }
 
     @Test
@@ -163,6 +166,8 @@ public class StudySetServiceTest {
         when(studySetRepository.findById(studySet.getId())).thenReturn(Optional.of(studySet));
 
         List<Game> savedGames = studySetService.getGamesByStudySetId(studySet.getId());
+
+        System.out.println();
 
         assertEquals(games, savedGames);
     }

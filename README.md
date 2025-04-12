@@ -10,7 +10,7 @@
 
 ## Usage
 
-To run, use either mvnw, mvnw.cmd, or manually call "mvn spring-boot:run".
+To run, call "mvn spring-boot:run" in the root directory of the project (to know if you are in the right place, make sure the pom.xml file is present).
 
 ## UI
 

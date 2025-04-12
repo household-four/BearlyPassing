@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import bearly_passing.project.domain.StudySet;
 import bearly_passing.project.dto.GameDTO;
@@ -52,9 +53,11 @@ public class StudySetController {
     }
 
     @PostMapping("/canvas")
-    public StudySetDTO importCanvasSet(@RequestParam String canvasFile) throws IOException {
+    public StudySetDTO importCanvasSet(
+            @RequestParam("file") MultipartFile canvasFile,
+            @RequestParam("userId") Long userId) throws IOException {
         log.info("Importing canvas file");
-        StudySet canvasSet = studySetService.loadCanvasSet(canvasFile);
+        StudySet canvasSet = studySetService.loadCanvasSet(canvasFile.getInputStream(), userId);
         return StudySetMapper.toDTO(canvasSet);
     }
 

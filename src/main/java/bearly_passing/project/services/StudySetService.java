@@ -85,12 +85,8 @@ public class StudySetService {
 
     @Transactional
     public StudySet loadJsonSet(StudySetDTO studySet) throws IOException {
-        System.out.println("StudySet: " + studySet.getTitle());
-        System.out.println("StudySet: " + studySet.getDescription());
-
         User user = userRepository.findById(studySet.getCreator().getId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        System.out.println("user: " + user.getName());
 
         StudySet newStudySet = new StudySet();
         newStudySet.setTitle(studySet.getTitle());
@@ -98,7 +94,6 @@ public class StudySetService {
         newStudySet.setCreator(user);
 
         for (QuestionDTO question : studySet.getQuestions()) {
-            System.out.println("question: " + question.getBody());
             Question newQuestion = new Question();
             newQuestion.setStudySet(newStudySet);
             newQuestion.setBody(question.getBody());
@@ -111,14 +106,22 @@ public class StudySetService {
     }
 
     @Transactional
-    public StudySet loadCanvasSet(String canvasFile) throws IOException {
+    public StudySet loadCanvasSet(InputStream inputStream, Long userId) throws IOException {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
-        File xml = new File("data/canvasSets/" + canvasFile + ".xml");
-        Document document = Jsoup.parse(xml);
+        // File xml = new File("data/canvasSets/" + canvasFile + ".xml");
+        Document document = Jsoup.parse(inputStream, "UTF-8", "");
+        // Document document = Jsoup.parse(xml);
 
         StudySet studySet = new StudySet();
+        studySet.setTitle("New Canvas Set");
+        studySet.setDescription("New study set created from a Canvas quiz XML file.");
+        studySet.setCreator(user);
+
         for (Question question : parseForQuestions(document)) {
-            studySet.addQuestion(question);
+            studySet.getQuestions().add(question);
+            question.setStudySet(studySet);
             questionRepository.save(question);
         }
 
@@ -141,7 +144,7 @@ public class StudySetService {
                     question.setAnswer(response.selectFirst("material mattext").text());
                 }
             }
-
+            question.setDifficulty(Question.Difficulty.MEDIUM);
             questions.add(question);
         }
 

@@ -15,7 +15,7 @@ To run, use either mvnw, mvnw.cmd, or manually call "mvn spring-boot:run".
 ## UI
 
 The user interface is implemented in a [different repository](https://github.com/household-four/bearly-passing-ui). The full
-user guide is available in that repo's readme or on the project document. 
+user guide is available in that repo's readme.
 
 ## Postman Collection
 

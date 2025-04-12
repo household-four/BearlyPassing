@@ -10,7 +10,7 @@
 
 ## Usage
 
-To run, call "mvn spring-boot:run" in the root directory of the project (to know if you are in the right place, make sure the pom.xml file is present).
+To run, call "mvn spring-boot:run" in the root directory of the project. To know if you are in the right place, make sure the pom.xml file is present.
 
 ## UI
 
